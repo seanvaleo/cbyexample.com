@@ -1,23 +1,15 @@
-<p>
-<h1>C by Example</h1>
-</p>
+# C by Example
 
-<p>
 C is a general-purpose, procedural computer programming language.
 
-</p>
+  * Hello World
 
-<ul>
-<li>Hello World</li>
-</ul>
-
-<code>
+```c
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
-</code>
+```
 
-<p>
-	Copyright Sean Valeo &copy; 2019 | <a href="https://github.com/seanvaleo/cbyexample">Source</a> | <a href="https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt">Contributors</a>
-</p>
+Copyright Sean Valeo &copy; 2019 | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+
 
