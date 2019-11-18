@@ -11,6 +11,6 @@ Please follow the "fork-and-pull" Git workflow, generally as described below:
 
 ## Attribution
 
-Please include your name and a summary of your works to the list of contributors in [CONTRIBUTERS.txt](CONTRIBUTORS.txt "CONTRIBUTORS.txt"). 
+Please include your name and a summary of your works to the list of contributors in [CONTRIBUTORS.txt](CONTRIBUTORS.txt "CONTRIBUTORS.txt"). 
 
 

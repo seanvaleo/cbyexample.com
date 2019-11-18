@@ -1,10 +1,18 @@
 # C by Example
 
-C is a general-purpose, procedural computer programming language designed by Dennis Ritchie.
+C is a general-purpose, procedural computer programming language designed by Dennis Ritchie. This guide intends to showcase some of the language's features in a user-friendly, progressive format.
 
-This guide intends to showcase some of the language's features in a user-friendly format. Check out the list of examples below to get started.
+Check out the list of examples below to get started.
 
   * [Hello World](#hello-world)
+  * [Switch](#)
+  * [Array](#)
+  * [Functions](#)
+  * [Variadic Functions](#)
+  * [For Loops](#)
+  * [While Loops](#)
+  * [Goto](#)
+  * [Project Structure](#)
 
 
 ## Hello World
