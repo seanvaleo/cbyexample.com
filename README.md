@@ -30,9 +30,9 @@ Check out the list of examples below to get started.
   * [Pointer Arithmetic](#pointer-arithmetic)
   * [Threads](#threads)
   * [Structs](#structs)
-  * [Atomics](#atomics)
+  * [Atomic](#atomic)
   * [Union](#union)
-  * [Input / Output](#input-output)
+  * [Input / Output](#input-/-output)
   * [Bitwise Operations](#bitwise-operations)
   * [Typedef](#typedef)
   * [Enumerations](#enumerations)
@@ -47,9 +47,12 @@ Check out the list of examples below to get started.
 #include <stdio.h>
 
 int main() {
-	printf("Hello world\n");
+	printf("Hello World!\n");
 	return 0;
 }
+```
+```
+output: Hello World!
 ```
 
 ## Types 
@@ -61,13 +64,30 @@ int main() {
 ## Comments
 
 ```c
+/*
+ * Multi-line comments are written like this.
+ */
 
+// Single-line comments are written like this
 ```
 
 ## Switch
-
+Jump to a matching value. Usually cleaner to write than an if/else tree, and faster under the hood.
 ```c
-
+int x = 2;
+switch(x) {
+	case 1:
+	printf("One")
+	break; // you must break the search or it will fall through to the next match.
+	case 2:
+	printf("Two")
+	break;
+	default: // if no match is found
+	break;
+}
+```
+```
+output: 2
 ```
 
 ## Array
@@ -85,20 +105,55 @@ int main() {
 ## Functions
 
 ```c
+// double the number passed in as 'x', returning the new value to the function caller.
+int double_number_a(int x) {
+	return 2 * x;
+}
 
+// double the number pointed to by 'x', storing the result in the original variable.
+void double_number_b(int* x) {
+	x *= 2;
+}
+
+int main() {
+	int num = 5;
+	printf("%d\n", double_number_a(num));
+	printf("%d\n", num);
+	double_number_b(&num);
+	printf("%d\n", num);
+}
+```
+```
+output: 10
+        5
+        10
 ```
 
 ## For Loops
 
 ```c
-
+for(int i = 1; i <= 3; i++) {
+	printf("%d\n", i);
+}
 ```
-
+```
+output: 1
+        2
+        3
+```
 
 ## While Loops
 
 ```c
-
+int x = 1;
+while(x <= 3) {
+	printf("%d\n", x++);
+}
+```
+```
+output: 1
+        2
+        3
 ```
 
 ## Goto
@@ -107,7 +162,7 @@ int main() {
 
 ```
 
-## Integer Promotions
+## Integer Promotion
 
 ```c
 
@@ -122,13 +177,36 @@ int main() {
 ## Program Arguments
 
 ```c
-
+int main(int argc, char* argv) {
+	for(int i = 0; i < argc; i++) {
+		printf("%s", argv[i]);
+	}
+	return 0;
+}
+```
+```
+input: ./program arg1 arg2
+```
+```
+output: program
+        arg1
+        arg2
 ```
 
 ## Dependencies
-
+In file main.c:
 ```c
+#include <stdio.h> // include a dependency from the system library
+#include "prog.h" // include a local dependency from a relative path
+```
+In file prog.h:
+```c
+#ifndef PROG_H // only process the below if it hasn't already been processed in the current compilation.
+#define PROG_H
 
+// file contents here
+
+#endif
 ```
 
 ## Storage Class Specifiers
