@@ -41,7 +41,7 @@ Check out the list of examples below to get started.
   * [Project Structure](#project-structure)
 
 ## Hello World
-
+#### C17
 ```c
 #include <stdio.h>
 
@@ -55,9 +55,9 @@ output: Hello World!
 ```
 
 ## Types 
-
-```c#
-include <stdbool.h>
+#### C17
+```c
+#include <stdbool.h>
 
 int a; // Integer
 int b = 1; // You can initialize a variable when you declare it.
@@ -72,7 +72,7 @@ void j; // No type
 ```
 
 ## Comments
-
+#### C17, C++20
 ```c
 /*
  * Multi-line comments are written like this.
@@ -83,6 +83,7 @@ void j; // No type
 
 ## Switch
 Jump to a matching value. Usually cleaner to write than an if/else tree, and faster under the hood.
+#### C17, C++20
 ```c
 int x = 2;
 switch(x) {
@@ -101,7 +102,7 @@ output: Two
 ```
 
 ## Array
-
+#### C17, C++20
 ```c
 int my_array[5];
 int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
@@ -117,6 +118,7 @@ output: 2
 ```
 
 ## Strings
+#### C17
 In C, a string is an array of characters, terminated with the '\0' character.
 
 ```c
@@ -124,9 +126,12 @@ char greeting_a[6] = {'H','e','l','l','o','\0'};
 char greeting_b[] = "Hello";
 char* greeting_c = "Hello";
 ```
+#### C++20
+```c++
+```
 
 ## Functions
-
+#### C17
 ```c
 // Double the number passed in as 'x', returning the new value to the function caller.
 int double_number_a(int x) {
@@ -153,7 +158,7 @@ output: 10
 ```
 
 ## For Loops
-
+#### C17
 ```c
 for(int i = 1; i <= 3; i++) {
 	printf("%d\n", i);
@@ -166,7 +171,7 @@ output: 1
 ```
 
 ## While Loops
-
+#### C17
 ```c
 int x = 1;
 while(x <= 3) {
@@ -182,7 +187,7 @@ output: 1
 ## Goto
 The use of goto is contraversial as it can promote bad code decisions.
 However it can be very useful for avoiding large nested 'if' statements.
-
+#### C17
 ```c
 int main() {
 	int x;
@@ -196,6 +201,7 @@ int main() {
 
 ## Integer Promotion
 Any operand whose type ranks lower than int is temporarily promoted to int or unsigned int for comparison.
+#### C17
 ```c
 char x = 'A';
 if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
@@ -206,7 +212,7 @@ output: Less than
 ```
 
 ## Program Arguments
-
+#### C17
 ```c
 int main(int argc, char* argv) {
 	for(int i = 0; i < argc; i++) {
@@ -225,6 +231,7 @@ output: program
 ```
 
 ## Dependencies
+#### C17, C++20
 In file main.c:
 ```c
 #include <stdio.h> // Include a dependency from the system library
