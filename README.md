@@ -50,15 +50,17 @@ int main() {
 	return 0;
 }
 ```
+#### C++20
+```
+
+```
 ```
 output: Hello World!
 ```
 
 ## Types 
-#### C17
+#### C17, C++20
 ```c
-#include <stdbool.h>
-
 int a; // Integer
 int b = 1; // You can initialize a variable when you declare it.
 unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
@@ -83,7 +85,7 @@ void j; // No type
 
 ## Switch
 Jump to a matching value. Usually cleaner to write than an if/else tree, and faster under the hood.
-#### C17, C++20
+#### C17
 ```c
 int x = 2;
 switch(x) {
@@ -97,12 +99,16 @@ switch(x) {
 	break;
 }
 ```
+#### C++20
+```cpp
+
+```
 ```
 output: Two
 ```
 
 ## Array
-#### C17, C++20
+#### C17
 ```c
 int my_array[5];
 int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
@@ -112,6 +118,10 @@ for(int i = 0; i < sizeof(my_array); i++) {
 }
 
 printf("%d\n", my_array[2]);
+```
+#### C++20
+```cpp
+
 ```
 ```
 output: 2
@@ -151,6 +161,10 @@ int main() {
 	printf("%d\n", num);
 }
 ```
+#### C++20
+```cpp
+
+```
 ```
 output: 10
         5
@@ -163,6 +177,10 @@ output: 10
 for(int i = 1; i <= 3; i++) {
 	printf("%d\n", i);
 }
+```
+#### C++20
+```cpp
+
 ```
 ```
 output: 1
@@ -177,6 +195,10 @@ int x = 1;
 while(x <= 3) {
 	printf("%d\n", x++);
 }
+```
+#### C++20
+```cpp
+
 ```
 ```
 output: 1
@@ -198,6 +220,10 @@ int main() {
 	return 0;
 }
 ```
+#### C++20
+```cpp
+
+```
 
 ## Integer Promotion
 Any operand whose type ranks lower than int is temporarily promoted to int or unsigned int for comparison.
@@ -207,12 +233,16 @@ char x = 'A';
 if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
 else printf("Greater than or equal to\n");
 ```
+#### C++20
+```cpp
+
+```
 ```
 output: Less than
 ```
 
 ## Program Arguments
-#### C17
+#### C17, C++20
 ```c
 int main(int argc, char* argv) {
 	for(int i = 0; i < argc; i++) {
@@ -248,137 +278,225 @@ In file prog.h:
 ```
 
 ## Storage Class Specifiers
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Type Qualifiers
-
+#### C17
 ```c
 const int x
 
 ```
+#### C++20
+```cpp
+
+```
 
 ## Inline Functions
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Conditional If
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Arithmetic Operators
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Ternary Operator
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Address Resolution Operator
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Dereference Operator
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Pointers
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Pointer Arithmetic
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Threads
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Structs
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Atomic
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Union
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Input / Output
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Bitwise Operations
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Typedef
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Enumerations
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Variadic Functions
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Heap Allocation
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Assertions
-
+#### C17
 ```c
+
+```
+#### C++20
+```cpp
 
 ```
 
 ## Project Structure
+#### C17
 ```c
 
 ```
+#### C++20
+```cpp
 
+```
 
 Copyright Sean Valeo &copy; 2019 | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
 
