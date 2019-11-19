@@ -53,7 +53,13 @@ int main() {
 ```
 #### C++20
 ```
+#include <iostream>
+using namespace std;
 
+int main() {
+	cout << "Hello World!" << endl;
+	return 0;
+}
 ```
 ```
 output: Hello World!
@@ -102,6 +108,17 @@ switch(x) {
 ```
 #### C++20
 ```cpp
+int x = 2;
+switch(x) {
+	case 1:
+	cout << "One" << endl;
+	break; // You must break the search or it will fall through to the next match.
+	case 2:
+	cout << "Two" << endl;
+	break;
+	default: // If no match is found.
+	break;
+}
 
 ```
 ```
