@@ -1,4 +1,3 @@
-![Message from our Sponsors](assets/ads/mesors.png)
 
 C and C++ are general-purpose computer programming languages. They are closely-related but with significant differences.
 This guide intends to showcase some of the features and differences of both languages in a user-friendly, progressive format.
