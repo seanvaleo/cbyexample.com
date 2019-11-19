@@ -1,6 +1,8 @@
 # C by Example
 
-C is a general-purpose, procedural computer programming language designed by Dennis Ritchie. This guide intends to showcase some of the language's features in a user-friendly, progressive format.
+C and C++ are general-purpose computer programming languages. They are closely-related but with significant differences.
+This guide intends to showcase some of the features and differences of both languages in a user-friendly, progressive format.
+This is not a substitution for in-depth study, but should serve well as an introduction or a refresher.
 
 Check out the list of examples below to get started.
 
@@ -15,7 +17,6 @@ Check out the list of examples below to get started.
   * [While Loops](#while-loops)
   * [Goto](#goto)
   * [Integer Promotion](#integer-promotion)
-  * [Constants](#constants)
   * [Program Arguments](#program-arguments)
   * [Dependencies](#dependencies)
   * [Storage Class Specifiers](#storage-class-specifiers)
@@ -57,8 +58,19 @@ output: Hello World!
 
 ## Types 
 
-```c
+```c#
+include <stdbool.h>
 
+int a; // Integer
+int b = 1; // You can initialize a variable when you declare it.
+unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+short d; // Short integer
+long e; // Long integer
+float f; // Floating point integer
+double g; // Double-precision floating point integer
+bool h; // Boolean TRUE or FALSE
+char i; // Character
+void j; // No type
 ```
 
 ## Comments
@@ -68,7 +80,7 @@ output: Hello World!
  * Multi-line comments are written like this.
  */
 
-// Single-line comments are written like this
+// Single-line comments are written like this.
 ```
 
 ## Switch
@@ -78,39 +90,52 @@ int x = 2;
 switch(x) {
 	case 1:
 	printf("One")
-	break; // you must break the search or it will fall through to the next match.
+	break; // You must break the search or it will fall through to the next match.
 	case 2:
 	printf("Two")
 	break;
-	default: // if no match is found
+	default: // If no match is found.
 	break;
 }
 ```
 ```
-output: 2
+output: Two
 ```
 
 ## Array
 
 ```c
+int my_array[5];
+int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
 
+for(int i = 0; i < sizeof(my_array); i++) {
+	my_array[i] = i;
+}
+
+printf("%d\n", my_array[2]);
+```
+```
+output: 2
 ```
 
 ## Strings
+In C, a string is an array of characters, terminated with the '\0' character.
 
 ```c
-
+char greeting_a[6] = {'H','e','l','l','o','\0'};
+char greeting_b[] = "Hello";
+char* greeting_c = "Hello";
 ```
 
 ## Functions
 
 ```c
-// double the number passed in as 'x', returning the new value to the function caller.
+// Double the number passed in as 'x', returning the new value to the function caller.
 int double_number_a(int x) {
 	return 2 * x;
 }
 
-// double the number pointed to by 'x', storing the result in the original variable.
+// Double the number pointed to by 'x', storing the result in the original variable.
 void double_number_b(int* x) {
 	x *= 2;
 }
@@ -157,21 +182,29 @@ output: 1
 ```
 
 ## Goto
+The use of goto is contraversial as it can promote bad code decisions.
+However it can be very useful for avoiding large nested 'if' statements.
 
 ```c
-
+int main() {
+	int x;
+	scanf("%d", &x);
+	if(x < 3) goto cleanup;
+	// Program code here
+	cleanup:
+	return 0;
+}
 ```
 
 ## Integer Promotion
-
+Any operand whose type ranks lower than int is temporarily promoted to int or unsigned int for comparison.
 ```c
-
+char x = 'A';
+if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
+else printf("Greater than or equal to\n");
 ```
-
-## Constants
-
-```c
-
+```
+output: Less than
 ```
 
 ## Program Arguments
@@ -196,15 +229,15 @@ output: program
 ## Dependencies
 In file main.c:
 ```c
-#include <stdio.h> // include a dependency from the system library
-#include "prog.h" // include a local dependency from a relative path
+#include <stdio.h> // Include a dependency from the system library
+#include "prog.h" // Include a local dependency from a relative path
 ```
 In file prog.h:
 ```c
-#ifndef PROG_H // only process the below if it hasn't already been processed in the current compilation.
+#ifndef PROG_H // Only process the below if it hasn't already been processed in the current compilation.
 #define PROG_H
 
-// file contents here
+// File contents here
 
 #endif
 ```
@@ -218,6 +251,7 @@ In file prog.h:
 ## Type Qualifiers
 
 ```c
+const int x
 
 ```
 
