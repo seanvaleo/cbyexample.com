@@ -20,7 +20,8 @@ Check out the list of examples below to get started.
   * [Goto](#goto)
   * [Integer Promotion](#integer-promotion)
   * [Program Arguments](#program-arguments)
-  * [Dependencies](#dependencies)
+  * [Includes](#includes)
+  * [Modules](#modules)
   * [Storage Class Specifiers](#storage-class-specifiers)
   * [Type Qualifiers](#type-qualifiers)
   * [Inline Functions](#inline-functions)
@@ -42,6 +43,19 @@ Check out the list of examples below to get started.
   * [Variadic Functions](#variadic-functions)
   * [Heap Allocation](#heap-allocation)
   * [Assertions](#assertions)
+  * [Preprocessor](#preprocessor)
+  * [Compound Assignment](#compound-assignment)
+  * [Range](#range)
+  * [Namespaces](#namespaces)
+  * [Classes](#classes)
+  * [Class Methods](#class-methods)
+  * [Constructors / Destructors](#constructors-/-destructors)
+  * [Virtual Functions](#virtual-functions)
+  * [Friend Functions](#friend-functions)
+  * [Encapsulation](#encapsulation)
+  * [Inheritance](#inheritance)
+  * [Overloading](#overloading)
+  * [Templates](#templates)
   * [Project Structure](#project-structure)
 
 ## Hello World
@@ -55,7 +69,7 @@ int main() {
 }
 ```
 #### C++20
-```
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -69,18 +83,40 @@ output: Hello World!
 ```
 
 ## Types 
-#### C17, C++20
+#### C17
 ```c
-int a; // Integer
-int b = 1; // You can initialize a variable when you declare it.
-unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
-short d; // Short integer
-long e; // Long integer
-float f; // Floating point integer
-double g; // Double-precision floating point integer
-bool h; // Boolean TRUE or FALSE
-char i; // Character
-void j; // No type
+#include <stdbool.h>  //for bool
+
+int main() {
+	int a; // Integer
+	int b = 1; // You can initialize a variable when you declare it.
+	unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	short d; // Short integer
+	long e; // Long integer
+	float f; // Floating point integer
+	double g; // Double-precision floating point integer
+	bool h; // Boolean TRUE or FALSE
+	char i; // Character
+	void j; // No type
+	return 0;
+}
+```
+#### C++20
+```cpp
+int main() {
+	int a; // Integer
+	int b = 1; // You can initialize a variable when you declare it.
+	unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	short d; // Short integer
+	long e; // Long integer
+	float f; // Floating point integer
+	double g; // Double-precision floating point integer
+	bool h; // Boolean TRUE or FALSE
+	char i; // Character
+	void j; // No type
+	auto k = 1; // Automatically infer type. Not a type in itself.
+	return 0;
+}
 ```
 
 ## Comments
@@ -97,32 +133,42 @@ void j; // No type
 Jump to a matching value. Usually cleaner to write than an if/else tree, and faster under the hood.
 #### C17
 ```c
-int x = 2;
-switch(x) {
-	case 1:
-	printf("One")
-	break; // You must break the search or it will fall through to the next match.
-	case 2:
-	printf("Two")
-	break;
-	default: // If no match is found.
-	break;
+#include <stdio.h>
+
+int main() {
+	int x = 2;
+	switch(x) {
+		case 1:
+		printf("One")
+		break; // You must break the search or it will fall through to the next match.
+		case 2:
+		printf("Two")
+		break;
+		default: // If no match is found.
+		break;
+	}
+	return 0;
 }
 ```
 #### C++20
 ```cpp
-int x = 2;
-switch(x) {
-	case 1:
-	cout << "One" << endl;
-	break; // You must break the search or it will fall through to the next match.
-	case 2:
-	cout << "Two" << endl;
-	break;
-	default: // If no match is found.
-	break;
-}
+#include <iostream>
+using namespace std;
 
+int main() {
+	int x = 2;
+	switch(x) {
+		case 1:
+		cout << "One" << endl;
+		break; // You must break the search or it will fall through to the next match.
+		case 2:
+		cout << "Two" << endl;
+		break;
+		default: // If no match is found.
+		break;
+	}
+	return 0;
+}
 ```
 ```
 output: Two
@@ -131,18 +177,36 @@ output: Two
 ## Array
 #### C17
 ```c
-int my_array[5];
-int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
+#include <stdio.h>
 
-for(int i = 0; i < sizeof(my_array); i++) {
-	my_array[i] = i;
+int main() {
+	int my_array[5];
+	int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
+
+	for(size_t i = 0; i < sizeof(my_array); i++) {
+		my_array[i] = i;
+	}
+
+	printf("%d\n", my_array[2]);
+	return 0;
 }
-
-printf("%d\n", my_array[2]);
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	int my_array[5];
+	int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
+
+	for(size_t i = 0; i < sizeof(my_array); i++) {
+		my_array[i] = i;
+	}
+
+	cout << my_array[2] << endl;
+	return 0;
+}
 ```
 ```
 output: 2
@@ -153,17 +217,32 @@ output: 2
 In C, a string is an array of characters, terminated with the '\0' character.
 
 ```c
-char greeting_a[6] = {'H','e','l','l','o','\0'};
-char greeting_b[] = "Hello";
-char* greeting_c = "Hello";
+#include <stdio.h>
+
+int main() {
+	char greeting_a[6] = {'H','e','l','l','o','\0'};
+	char greeting_b[] = "Hello";
+	char* greeting_c = "Hello";
+	return 0;
+}
 ```
 #### C++20
-```c++
+```cpp
+#include <string>
+using namespace std;
+
+int main() {
+	string str1 = "Hello";
+	auto str1 = "Hello";
+	return 0;
+}
 ```
 
 ## Functions
 #### C17
 ```c
+#include <stdio.h>
+
 // Double the number passed in as 'x', returning the new value to the function caller.
 int double_number_a(int x) {
 	return 2 * x;
@@ -171,7 +250,7 @@ int double_number_a(int x) {
 
 // Double the number pointed to by 'x', storing the result in the original variable.
 void double_number_b(int* x) {
-	x *= 2;
+	*x *= 2;
 }
 
 int main() {
@@ -180,11 +259,32 @@ int main() {
 	printf("%d\n", num);
 	double_number_b(&num);
 	printf("%d\n", num);
+	return 0;
 }
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+// Double the number passed in as 'x', returning the new value to the function caller.
+int double_number_a(int x) {
+	return 2 * x;
+}
+
+// Double the number pointed to by 'x', storing the result in the original variable.
+void double_number_b(int* x) {
+	*x *= 2;
+}
+
+int main() {
+	auto num = 5;
+	cout << double_number_a(num) << endl;
+	cout << num << endl;
+	double_number_b(&num);
+	cout << num << endl;
+	return 0;
+}
 ```
 ```
 output: 10
@@ -195,13 +295,26 @@ output: 10
 ## For Loops
 #### C17
 ```c
-for(int i = 1; i <= 3; i++) {
-	printf("%d\n", i);
+#include <stdio.h>
+
+int main() {
+	for(int i = 1; i <= 3; i++) {
+		printf("%d\n", i);
+	}
+	return 0;
 }
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	for (auto i = 1; i <= 3; i++) {
+		cout << i << endl;
+	}
+	return 0;
+}
 ```
 ```
 output: 1
@@ -212,14 +325,28 @@ output: 1
 ## While Loops
 #### C17
 ```c
-int x = 1;
-while(x <= 3) {
-	printf("%d\n", x++);
+#include <stdio.h>
+
+int main() {
+	int x = 1;
+	while(x <= 3) {
+		printf("%d\n", x++);
+	}
+	return 0;
 }
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	auto x = 1;
+	while(x <= 3) {
+		cout << x << endl;
+	}
+	return 0;
+}
 ```
 ```
 output: 1
@@ -232,6 +359,8 @@ The use of goto is contraversial as it can promote bad code decisions.
 However it can be very useful for avoiding large nested 'if' statements.
 #### C17
 ```c
+#include <stdio.h>
+
 int main() {
 	int x;
 	scanf("%d", &x);
@@ -243,31 +372,67 @@ int main() {
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	int x;
+	cin >> x;
+	if(x < 3) goto cleanup;
+	// Program code here
+	cleanup:
+	return 0;
+}
 ```
 
 ## Integer Promotion
 Any operand whose type ranks lower than int is temporarily promoted to int or unsigned int for comparison.
 #### C17
 ```c
-char x = 'A';
-if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
-else printf("Greater than or equal to\n");
+#include <stdio.h>
+
+int main() {
+	char x = 'A';
+	if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
+	else printf("Greater than or equal to\n");
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	auto x = 'A';
+	if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
+	else printf("Greater than or equal to\n");
+	return 0;
+}
 ```
 ```
 output: Less than
 ```
 
 ## Program Arguments
-#### C17, C++20
+#### C17
 ```c
-int main(int argc, char* argv) {
+#include <stdio.h>
+
+int main(int argc, char* argv[]) {
 	for(int i = 0; i < argc; i++) {
-		printf("%s", argv[i]);
+		printf("%s\n", argv[i]);
+	}
+	return 0;
+}
+```
+#### C++20
+```cpp
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+	for(auto i = 0; i < argc; i++) {
+		printf("%s\n", argv[i]);
 	}
 	return 0;
 }
@@ -281,8 +446,11 @@ output: program
         arg2
 ```
 
-## Dependencies
-#### C17, C++20
+## Includes
+Includes are instructions to the preprocessor to include external code. External code is made up of at least a header file (interface) and a source file (implementation).
+
+When compiling your program, **#include** the header, and link the source file at compile time.
+#### C17
 In file main.c:
 ```c
 #include <stdio.h> // Include a dependency from the system library
@@ -296,6 +464,53 @@ In file prog.h:
 // File contents here
 
 #endif
+```
+#### C++20
+In file main.cpp:
+```cpp
+#include <iostream> // Include a dependency from the system library
+#include "prog.hpp" // Include a local dependency from a relative path
+```
+In file prog.hpp:
+```cpp
+#ifndef PROG_HPP // Only process the below if it hasn't already been processed in the current compilation.
+#define PROG_HPP
+
+// File contents here
+
+#endif
+```
+
+## Modules
+Modules are a new method in C++ that act like packages.
+#### C++20
+In file foo.cpp:
+```cpp
+export module Foo;
+
+namespace Bar {
+	int f_internal() {
+	        return 10;
+	}
+
+	export int f() {
+		return f_internal();
+	}
+}
+```
+In file main.cpp:
+```cpp
+import std;
+import Foo;
+using namespace std;
+
+int main() {
+	cout << Bar::f() << endl;
+	return 0;
+}
+```
+```
+output: 10
 ```
 
 ## Storage Class Specifiers
@@ -509,6 +724,92 @@ const int x
 
 ```
 
+## Preprocessor
+#### C17
+```c
+
+```
+#### C++20
+```cpp
+
+```
+
+## Compound Assignment
+#### C17
+```c
+
+```
+#### C++20
+```cpp
+
+```
+
+## Range
+#### C++20
+```cpp
+
+```
+
+## Namespaces
+#### C++20
+```cpp
+
+```
+
+## Classes
+#### C++20
+```cpp
+
+```
+
+## Class Methods
+#### C++20
+```cpp
+
+```
+
+## Constructors / Destructors
+#### C++20
+```cpp
+
+```
+
+## Virtual Functions
+#### C++20
+```cpp
+
+```
+
+## Friend Functions
+#### C++20
+```cpp
+
+```
+
+## Encapsulation
+#### C++20
+```cpp
+
+```
+
+## Inheritance
+#### C++20
+```cpp
+
+```
+
+## Overloading
+#### C++20
+```cpp
+
+```
+
+## Templates
+#### C++20
+```cpp
+
+```
+
 ## Project Structure
 #### C17
 ```c
@@ -519,5 +820,5 @@ const int x
 
 ```
 
-Copyright Sean Valeo &copy; 2019 | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+Copyright &copy; 2019 Sean Valeo and contributors | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
 
