@@ -26,7 +26,6 @@ Check out the list of examples below to get started.
   * [Type Qualifiers](#type-qualifiers)
   * [Inline Functions](#inline-functions)
   * [Conditional If](#conditional-if)
-  * [Arithmetic Operators](#arithmetic-operators)
   * [Ternary Operator](#ternary-operator)
   * [Address Resolution Operator](#address-resolution-operator)
   * [Dereference Operator](#dereference-operator)
@@ -45,6 +44,7 @@ Check out the list of examples below to get started.
   * [Assertions](#assertions)
   * [Preprocessor](#preprocessor)
   * [Compound Assignment](#compound-assignment)
+  * [Pass by Reference](#pass-by-reference)
   * [Range](#range)
   * [Namespaces](#namespaces)
   * [Classes](#classes)
@@ -514,104 +514,233 @@ output: 10
 ```
 
 ## Storage Class Specifiers
+Define the storage duration of an object.
 #### C17
 ```c
-
+int main() {
+	auto int x; // automatic duration - scope lifetime
+	extern int x; // defined elsewhere
+	static int x; // hold value between invocations
+	register int x; // store in CPU register for fast access
+	return 0;
+}
 ```
 #### C++20
 ```cpp
-
+int main() {
+	extern int x; // defined elsewhere
+	static int x; // hold value between invocations
+	register int x; // store in CPU register for fast access
+	return 0;
+}
 ```
 
 ## Type Qualifiers
 #### C17
 ```c
-const int x
+int main() {
+	restrict int* x; // x should only be accessed from this pointer
+	const int x; // x, once defined, is constant and cannot be changed
+	atomic int x; // x can only be modified by one thread at a time
+	volatile int x; // x can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
+	return 0;
+}
 
 ```
 #### C++20
 ```cpp
-
+int main() {
+	restrict int* x; // x should only be accessed from this pointer
+	const int x; // x, once defined, is constant and cannot be changed
+	atomic int x; // x can only be modified by one thread at a time
+	volatile int x; // x can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
+	return 0;
+}
 ```
 
 ## Inline Functions
+Directly include the given function in the caller code sequence. This ensures that: function call overhead doesn’t occur ; overhead of push/pop variables on the stack is eliminated ; overhead of the return call is eliminated ; context-specific optimizations can be enabled at compile time.
 #### C17
 ```c
+#include <stdio.h>
 
+inline void square(int* x) {
+	*x *= *x;
+	return;
+}
+
+int main() {
+	int num = 5;
+	square(&num);
+	printf("%d\n", num);
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+inline void square(int& x) {
+	x *= x;
+	return;
+}
+
+int main() {
+	int num = 5;
+	square(num);
+	cout << num << endl;
+	return 0;
+}
+```
+```
+output: 5
 ```
 
 ## Conditional If
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+	int x = 4;
+	if(!x) printf("x is 0\n"); // one line if statement
+	else if(x < 0) printf("x is negative\n");
+	else { // or you can use a block			
+		printf("x is positive\n", x);
+	}
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	if(int x = 4 ; !x) cout << "x is 0" << endl; // one line if statement with optional init statement before condition
+	else if(x < 0) cout << "x is negative" << endl;
+	else { // or you can use a block
+		cout << "x is positive" << endl;
+	}	
+	return 0;
+}
 ```
-
-## Arithmetic Operators
-#### C17
-```c
-
 ```
-#### C++20
-```cpp
-
+output: x is positive
 ```
 
 ## Ternary Operator
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+	int x = 4;
+	x < 0 ? printf("x is negative\n") : printf("x is 0 or positive\n");
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	int x = 4;
+	x < 0 ? cout << "x is negative" << endl : cout << "x is 0 or positive" << endl;
+	return 0;
+}
 ```
 
 ## Address Resolution Operator
+Use '&' before a variable name to use it's address in memory rather than the value stored.
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+	int x = 5;
+	printf("The address of x is %p\n", (void*)&x);
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	int x = 5;
+	cout << "The address of x is" << &x << endl;
+	return 0;
+}
 ```
 
 ## Dereference Operator
+Use '\*' before a variable name to use the value it points to rather than the address stored.
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+	int x = 4;
+	int* y = &x;
+	printf("the value stored at x is %d\n", *y);
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
 
+int main() {
+	int x = 4;	
+	int* y = &x;
+	cout << "the value stored at x is" << *y << endl;
+	return 0;
+}
 ```
 
 ## Pointers
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+	int* x; // pointer to type int
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
 
+int main() {
+	int* x; // pointer to type int
+	return 0;
+}
 ```
 
 ## Pointer Arithmetic
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+
+	return 0;
+}
 ```
 
 ## Threads
@@ -739,6 +868,13 @@ const int x
 ```c
 
 ```
+#### C++20
+```cpp
+
+```
+
+## Pass by Reference
+An alternative to passing an address to a pointer.
 #### C++20
 ```cpp
 
