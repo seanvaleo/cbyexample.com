@@ -31,15 +31,14 @@ Check out the list of examples below to get started.
   * [Dereference Operator](#dereference-operator)
   * [Pointers](#pointers)
   * [Pointer Arithmetic](#pointer-arithmetic)
-  * [Threads](#threads)
   * [Structs](#structs)
-  * [Atomic](#atomic)
   * [Union](#union)
   * [Input / Output](#input-/-output)
   * [Bitwise Operations](#bitwise-operations)
   * [Typedef](#typedef)
   * [Enumerations](#enumerations)
   * [Variadic Functions](#variadic-functions)
+  * [Threads](#threads)
   * [Heap Allocation](#heap-allocation)
   * [Assertions](#assertions)
   * [Preprocessor](#preprocessor)
@@ -743,217 +742,428 @@ int main() {
 }
 ```
 
-## Threads
-#### C17
-```c
-
-```
-#### C++20
-```cpp
-
-```
-
 ## Structs
+Structs are user defined data storage objects containing public members by default.
 #### C17
 ```c
+#include <stdio.h>
 
+struct my_struct {
+	int x;
+	int y;
+};
+
+int main() {
+	my_struct object1;
+	object1.x = 1;
+	printf("%d\n", object1.x);
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+struct my_struct {
+	int x;
+	int y;
+};
+
+int main() {
+	my_struct object1;
+	object1.x = 1;
+	cout << object1.x << endl;
+	return 0;
+}
 ```
-
-## Atomic
-#### C17
-```c
-
 ```
-#### C++20
-```cpp
-
+output: 1
 ```
 
 ## Union
+A union is a special data type that can store different data types at the same memory location. You can define a union with many members, but only one member can contain a value at any given time. Unions provide an efficient way of using the same memory location for multiple purposes.
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Input / Output
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Bitwise Operations
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Typedef
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Enumerations
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Variadic Functions
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
+```
+
+## Threads
+#### C17
+```c
+#include <stdio.h>
+
+int main() {
+
+	return 0;
+}
+```
+#### C++20
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Heap Allocation
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Assertions
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Preprocessor
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Compound Assignment
 #### C17
 ```c
+#include <stdio.h>
 
+int main() {
+
+	return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Pass by Reference
 An alternative to passing an address to a pointer.
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Range
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Namespaces
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Classes
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Class Methods
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Constructors / Destructors
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Virtual Functions
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Friend Functions
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Encapsulation
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Inheritance
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Overloading
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Templates
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+	
+	return 0;
+}
 ```
 
 ## Project Structure
 #### C17
 ```c
-
 ```
 #### C++20
 ```cpp
-
 ```
 
 Copyright &copy; 2019 Sean Valeo and contributors | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
