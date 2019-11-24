@@ -81,7 +81,8 @@ int main() {
 output: Hello World!
 ```
 
-## Types 
+## Types
+Every variable has an associated data type that defines its data storage format. Each type requires a certain amount of memory and permits a relevant set of operations.
 #### C17
 ```c
 #include <stdbool.h>  //for bool
@@ -119,6 +120,7 @@ int main() {
 ```
 
 ## Comments
+Comments are used to write notes and documentation that is to be ignored by the compiler at build time.
 #### C17, C++20
 ```c
 /*
@@ -174,6 +176,7 @@ output: Two
 ```
 
 ## Array
+An array is a collection of items stored at contiguous memory locations. Elements in an array can be accessed randomly using indices.
 #### C17
 ```c
 #include <stdio.h>
@@ -212,9 +215,8 @@ output: 2
 ```
 
 ## Strings
+A string is an array of characters. C++ supports **string** types natively, but in C, a string is an array of **char** data, terminated with the '\0' character.
 #### C17
-In C, a string is an array of characters, terminated with the '\0' character.
-
 ```c
 #include <stdio.h>
 
@@ -238,6 +240,7 @@ int main() {
 ```
 
 ## Functions
+Functions are re-usable code segments, created to perform specific tasks.
 #### C17
 ```c
 #include <stdio.h>
@@ -292,6 +295,7 @@ output: 10
 ```
 
 ## For Loops
+Loops allow continuous execution of a statement or group of statements, usually until a condition is met.
 #### C17
 ```c
 #include <stdio.h>
@@ -322,6 +326,7 @@ output: 1
 ```
 
 ## While Loops
+Loops allow continuous execution of a statement or group of statements, usually until a condition is met.
 #### C17
 ```c
 #include <stdio.h>
@@ -354,8 +359,7 @@ output: 1
 ```
 
 ## Goto
-The use of goto is contraversial as it can promote bad code decisions.
-However it can be very useful for avoiding large nested 'if' statements.
+Used to jump between code sections. The use of **goto** is contraversial as it can promote bad code decisions, but it can be very useful for avoiding large nested 'if' statements.
 #### C17
 ```c
 #include <stdio.h>
@@ -414,6 +418,7 @@ output: Less than
 ```
 
 ## Program Arguments
+A program can optionally take a set of arguments from the user at launch.
 #### C17
 ```c
 #include <stdio.h>
@@ -481,7 +486,7 @@ In file prog.hpp:
 ```
 
 ## Modules
-Modules are a new method in C++ that act like packages.
+Modules are a new method in C++ to allow for better package management and easier library integration.
 #### C++20
 In file foo.cpp:
 ```cpp
@@ -535,6 +540,7 @@ int main() {
 ```
 
 ## Type Qualifiers
+A way of expressing additional information about a value through the type system to ensure correctness in the use of the data.
 #### C17
 ```c
 int main() {
@@ -597,6 +603,7 @@ output: 5
 ```
 
 ## Conditional If
+Responsible for modifying the flow of execution in a program. Always used with a condition, which is evaluated first before executing any statement inside the body.
 #### C17
 ```c
 #include <stdio.h>
@@ -630,6 +637,7 @@ output: x is positive
 ```
 
 ## Ternary Operator
+A conditional operator that provides a shorter syntax for the **if** statement. The first operand is a boolean expression; if the expression is true then the value of the second operand is returned otherwise the value of the third operand is returned.
 #### C17
 ```c
 #include <stdio.h>
@@ -702,6 +710,7 @@ int main() {
 ```
 
 ## Pointers
+A pointer is a variable that can hold the address of another variable. Just like regular data types, they must have their own type which refers to the type of the data at the address pointed to.
 #### C17
 ```c
 #include <stdio.h>
@@ -722,12 +731,18 @@ int main() {
 ```
 
 ## Pointer Arithmetic
+Perform integer addition or subtraction operations on pointers, taking the data type's size into account to return the correct address of the next item.
 #### C17
 ```c
 #include <stdio.h>
 
 int main() {
-
+	int x = 12, *x_ptr = &x;
+	char y = 'a', *y_ptr = &y;
+	printf("Value of x_ptr = %p\n", (void*)x_ptr);
+	printf("Value of y_ptr = %p\n", (void*)y_ptr);
+	printf("Value of x_ptr + 1 = %p\n", (void*)(x_ptr + 1));
+	printf("Value of y_ptr + 1 = %p\n", (void*)(y_ptr + 1));
 	return 0;
 }
 ```
@@ -737,9 +752,20 @@ int main() {
 using namespace std;
 
 int main() {
-
+	int x = 12, *x_ptr = &x;
+	char y = 'a', *y_ptr = &y;
+	cout << "Value of x_ptr = " << &x_ptr << endl;
+	cout << "Value of y_ptr = " << &y_ptr << endl;
+	cout << "Value of x_ptr + 1 = " << &(x_ptr + 1) << endl;
+	cout << "Value of y_ptr + 1 = " << &(y_ptr + 1) << endl;
 	return 0;
 }
+```
+```
+Output: Value of x_ptr = 492316
+        Value of y_ptr = 492303
+        Value of x_ptr + 1 = 492320
+        Value of y_ptr + 1 = 492304
 ```
 
 ## Structs
@@ -754,7 +780,7 @@ struct my_struct {
 };
 
 int main() {
-	my_struct object1;
+	struct my_struct object1;
 	object1.x = 1;
 	printf("%d\n", object1.x);
 	return 0;
@@ -771,7 +797,7 @@ struct my_struct {
 };
 
 int main() {
-	my_struct object1;
+	struct my_struct object1;
 	object1.x = 1;
 	cout << object1.x << endl;
 	return 0;
@@ -782,13 +808,20 @@ output: 1
 ```
 
 ## Union
-A union is a special data type that can store different data types at the same memory location. You can define a union with many members, but only one member can contain a value at any given time. Unions provide an efficient way of using the same memory location for multiple purposes.
+A union is a special data type that can store different data types at the same memory location. You can define a union with many members, but only one member can contain a value at any given time. Unions provide an efficient way of using the same memory location for multiple purposes. A union's size will be the size of the largest constituent type.
 #### C17
 ```c
 #include <stdio.h>
 
+union my_data {
+	int i;
+	float f;
+	char str[20];
+};
+ 
 int main() {
-
+	union my_data object1;        
+	printf("Size of my_data union: %d\n", sizeof(object1));
 	return 0;
 }
 ```
@@ -797,10 +830,20 @@ int main() {
 #include <iostream>
 using namespace std;
 
+union my_data {
+	int i;
+	float f;
+	char str[20];
+};
+
 int main() {
-	
+	union my_data object1;        
+	cout << "Size of my_data union: " << sizeof(object1) << endl;
 	return 0;
 }
+```
+```
+Output: Size of my_data union: 20
 ```
 
 ## Input / Output
