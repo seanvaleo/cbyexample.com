@@ -847,6 +847,7 @@ Output: Size of my_data union: 20
 ```
 
 ## Input / Output
+In C, interacting with the user console is made possible through the **stdio.h** (standard input output library) header, which contains methods for input and output. C++ provides a convenient abstraction built into the **iostream** header, known as streams, to perform input and output operations in sequential media such as the screen, the keyboard or a file. A stream is an entity that a program can use to either insert or extract data.
 #### C17
 ```c
 #include <stdio.h>
@@ -868,6 +869,7 @@ int main() {
 ```
 
 ## Bitwise Operations
+Bitwise operators are used to perform bit-level operations.
 #### C17
 ```c
 #include <stdio.h>
@@ -890,6 +892,7 @@ int main() {
 
 ## Typedef
 #### C17
+Used to add an additional name to a type. Useful when working with more complex types, making them more human readable.
 ```c
 #include <stdio.h>
 
@@ -910,6 +913,7 @@ int main() {
 ```
 
 ## Enumerations
+A user-defined data type, used to assign names to integral constants to make a program easier to read and maintain.
 #### C17
 ```c
 #include <stdio.h>
@@ -931,6 +935,7 @@ int main() {
 ```
 
 ## Variadic Functions
+Create a function with an arbitrary argument count for more flexibility.
 #### C17
 ```c
 #include <stdio.h>
@@ -952,6 +957,7 @@ int main() {
 ```
 
 ## Threads
+Used to execute one or more subthreads to allow for parallel processing in the same memory space, usually resulting in a performance improvement in a larger program.
 #### C17
 ```c
 #include <stdio.h>
@@ -973,6 +979,7 @@ int main() {
 ```
 
 ## Heap Allocation
+Memory can be allocated on the heap, an unreserved and relatively large region of memory outside of the program's memory scope.
 #### C17
 ```c
 #include <stdio.h>
@@ -994,6 +1001,7 @@ int main() {
 ```
 
 ## Assertions
+Statements used to explicitly test assumptions made by the programmer. Will be checked at runtime, or if static at compile time. A powerful tool for statement or unit testing.
 #### C17
 ```c
 #include <stdio.h>
@@ -1015,6 +1023,7 @@ int main() {
 ```
 
 ## Preprocessor
+A text substitution tool, used to instruct the compiler to perform any required macro pre-processing prior to actual compilation.
 #### C17
 ```c
 #include <stdio.h>
@@ -1036,6 +1045,7 @@ int main() {
 ```
 
 ## Compound Assignment
+Provides a shorter syntax for assigning the result of an arithmetic or bitwise operator by performing an operation on the two operands before assigning the result to the first operand.
 #### C17
 ```c
 #include <stdio.h>
@@ -1070,6 +1080,7 @@ int main() {
 ```
 
 ## Range
+Used as a more readable equivalent to a traditional loop when iterating over a range of data.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1082,6 +1093,7 @@ int main() {
 ```
 
 ## Namespaces
+A declarative region that provides a named scope to its constituent identifiers. Useful for organizing and reducing ambiguity in code.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1094,6 +1106,7 @@ int main() {
 ```
 
 ## Classes
+A user-defined data structure template declared with keyword **class** containing member functions and data.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1106,6 +1119,7 @@ int main() {
 ```
 
 ## Class Methods
+Functions in a class.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1118,6 +1132,7 @@ int main() {
 ```
 
 ## Constructors / Destructors
+A special member function of a class used to instantiate the class object.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1130,6 +1145,7 @@ int main() {
 ```
 
 ## Virtual Functions
+Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1142,6 +1158,7 @@ int main() {
 ```
 
 ## Friend Functions
+A function of a class defined outside of its scope but with the right to access all private and protected members of the class.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1154,6 +1171,7 @@ int main() {
 ```
 
 ## Encapsulation
+Fundamental OOP concept used to group together data and functions, and provide varying levels of abstraction from the user.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1166,6 +1184,7 @@ int main() {
 ```
 
 ## Inheritance
+Fundamental OOP concept. The capability of a class to derive properties and characteristics from another class.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1177,7 +1196,8 @@ int main() {
 }
 ```
 
-## Overloading
+## Polymorphism
+Fundamental OOP concept. Allows operations or objects to behave differently in different contexts. Through runtime function overriding (using virtual functions) or, as below, through compile-time function overloading by creating more than one function with the same name but different parameters.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1190,6 +1210,7 @@ int main() {
 ```
 
 ## Templates
+A blueprint for creating a generic class or function. The foundation of generic programming, which involves writing code in a way that is independent of any particular type.
 #### C++20
 ```cpp
 #include <iostream>
@@ -1202,6 +1223,7 @@ int main() {
 ```
 
 ## Project Structure
+It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
 #### C17
 ```c
 ```
