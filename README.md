@@ -1225,10 +1225,22 @@ int main() {
 ## Project Structure
 It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
 #### C17
-```c
+```
+src/myproject/main.c // main function
+src/myproject/include/file.c // function definitions
+src/myproject/include/file.h // structs, function prototypes
+src/myproject/makefile // automated project build file
+src/myproject/README.md // store any useful documentation or links to documentation in here
+bin/file // executable output from compiler
 ```
 #### C++20
-```cpp
+```
+src/myproj/main.cpp // main function
+src/myproj/include/file.cpp // function definitions
+src/myproj/include/file.hpp // classes, function prototypes
+src/myproj/makefile // automated project build file
+src/myproject/README.md // store any useful documentation or links to documentation in here
+bin/file // executable output from compiler
 ```
 
 Copyright &copy; 2019 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
