@@ -295,7 +295,7 @@ output: 10
 ```
 
 ## For Loops
-Loops allow continuous execution of a statement or group of statements, usually until a condition is met.
+Loops allow for continuous execution of a statement or group of statements, usually until a condition is met.
 #### C17
 ```c
 #include <stdio.h>
@@ -1231,5 +1231,5 @@ It's useful to follow a conventional and sensible structure when organizing a pr
 ```cpp
 ```
 
-Copyright &copy; 2019 Sean Valeo and contributors | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+Copyright &copy; 2019 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
 
