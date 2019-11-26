@@ -33,22 +33,22 @@ Check out the list of examples below to get started.
   * [Pointer Arithmetic](#pointer-arithmetic)
   * [Structs](#structs)
   * [Union](#union)
-  * [Input / Output](#input-/-output)
+  * [Input & Output](#input--output)
   * [Bitwise Operations](#bitwise-operations)
   * [Typedef](#typedef)
   * [Enumerations](#enumerations)
   * [Variadic Functions](#variadic-functions)
   * [Threads](#threads)
+  * [Mutex](#mutex)
   * [Heap Allocation](#heap-allocation)
   * [Assertions](#assertions)
-  * [Preprocessor](#preprocessor)
   * [Compound Assignment](#compound-assignment)
   * [Pass by Reference](#pass-by-reference)
   * [Range](#range)
   * [Namespaces](#namespaces)
   * [Classes](#classes)
   * [Class Methods](#class-methods)
-  * [Constructors / Destructors](#constructors-/-destructors)
+  * [Constructors & Destructors](#constructors--destructors)
   * [Virtual Functions](#virtual-functions)
   * [Friend Functions](#friend-functions)
   * [Encapsulation](#encapsulation)
@@ -846,14 +846,17 @@ int main() {
 Output: Size of my_data union: 20
 ```
 
-## Input / Output
+## Input & Output
 In C, interacting with the user console is made possible through the **stdio.h** (standard input output library) header, which contains methods for input and output. C++ provides a convenient abstraction built into the **iostream** header, known as streams, to perform input and output operations in sequential media such as the screen, the keyboard or a file. A stream is an entity that a program can use to either insert or extract data.
 #### C17
 ```c
 #include <stdio.h>
 
 int main() {
-
+	int x;
+	printf("Enter an integer value for x: ");
+	scanf("%d", &x);
+	printf("The value at x is now: %d\n", x);
 	return 0;
 }
 ```
@@ -863,9 +866,16 @@ int main() {
 using namespace std;
 
 int main() {
-	
+	int x;
+	cout << "Enter an integer value for x: ";
+	cin >> x;
+	cout << "The value at x is now: " << x << endl;
 	return 0;
 }
+```
+```
+output: Enter an integer value for x: 6
+        The value at x is now: 6
 ```
 
 ## Bitwise Operations
@@ -897,7 +907,14 @@ Used to add an additional name to a type. Useful when working with more complex 
 #include <stdio.h>
 
 int main() {
-
+	unsigned char a = 5; // 00000101
+	unsigned char b = 9; // 00001001
+	printf("a & b = %d\n", a & b); // 00000001
+	printf("a | b = %d\n", a | b); // 00001101
+	printf("a ^ b = %d\n", a ^ b); // 00001100
+	printf("~a = %d\n", a = ~a); // 11111010
+	printf("b << 1 = %d\n", b << 1); // 00010010
+	printf("b >> 1 = %d\n", b >> 1); // 00000100
 	return 0;
 }
 ```
@@ -907,19 +924,46 @@ int main() {
 using namespace std;
 
 int main() {
-	
+	unsigned char a = 5; // 00000101
+	unsigned char b = 9; // 00001001
+	cout <<	"a & b = " << (a & b) << endl; // 00000001
+	cout <<	"a | b = " << (a | b) << endl; // 00001101
+	cout <<	"a ^ b = " << (a ^ b) << endl; // 00001100
+	cout <<	"~a = " << (~a) << endl; // 11111010
+	cout << "b << 1 = " << (b << 1) << endl; // 00010010
+	cout <<	"b >> 1 = " << (b >> 1) << endl; // 00000100
 	return 0;
 }
 ```
-
+```
+output: a & b = 1
+        a | b = 13
+        a ^ b = 12
+        ~a = 250
+        b << 1 = 18
+        b >> 1 = 4
+```
 ## Enumerations
 A user-defined data type, used to assign names to integral constants to make a program easier to read and maintain.
 #### C17
 ```c
 #include <stdio.h>
 
-int main() {
+enum week {
+	mon,
+	tue,
+	wed,
+	thu,
+	fri,
+	sat,
+	sun
+};
 
+int main() {
+	for(int i = mon; i <= sun; i++)
+	{
+		printf("%d ", i); 
+	} 
 	return 0;
 }
 ```
@@ -928,10 +972,32 @@ int main() {
 #include <iostream>
 using namespace std;
 
+enum week {
+	mon,
+	tue,
+	wed,
+	thu,
+	fri,
+	sat,
+	sun
+};
+
 int main() {
-	
+	for(int i = mon; i <= sun; i++)
+	{
+		cout << i << endl; 
+	} 
 	return 0;
 }
+```
+```
+output: 0
+        1
+        2
+        3
+        4
+        5
+        6
 ```
 
 ## Variadic Functions
@@ -939,9 +1005,26 @@ Create a function with an arbitrary argument count for more flexibility.
 #### C17
 ```c
 #include <stdio.h>
+#include <stdarg.h>
+
+int sum(int count, ...)
+{
+	int total, i, temp;
+	total = 0;
+	va_list args;
+	va_start(args, count);
+	for(int i = 0; i < count; i++) {
+		temp = va_arg(args, int);
+        	total += temp;
+	}
+	va_end(args);
+	return total;
+}
 
 int main() {
-
+	int numbers[3] = {5, 10, 15};
+	int sum_of_numbers = sum(3, numbers[0], numbers[1], numbers[2]);
+	printf("Sum of the array %d\n", sum_of_numbers);
 	return 0;
 }
 ```
@@ -950,10 +1033,29 @@ int main() {
 #include <iostream>
 using namespace std;
 
+int sum(int count, ...)
+{
+	int total, i, temp;
+	total = 0;
+	va_list args;
+	va_start(args, count);
+	for(int i = 0; i < count; i++) {
+		temp = va_arg(args, int);
+        	total += temp;
+	}
+	va_end(args);
+	return total;
+}
+
 int main() {
-	
+	int numbers[3] = {5, 10, 15};
+	int sum_of_numbers = sum(3, numbers[0], numbers[1], numbers[2]);
+	cout << "Sum of the array << sum_of_numbers << endl;
 	return 0;
 }
+```
+```
+output: 30
 ```
 
 ## Threads
@@ -961,19 +1063,97 @@ Used to execute one or more subthreads to allow for parallel processing in the s
 #### C17
 ```c
 #include <stdio.h>
+#include <threads.h>
 
-int main() {
-
+int thread_func(void* arg) { 
+	printf("Printing from Thread\n"); 
+	return NULL;
+} 
+   
+int main() { 
+	thrd_t thread_id; 
+	thrd_create(&thread_id, thread_func, NULL); 
+	thrd_join(thread_id, NULL);  // Wait for thread to return before continuing execution
+	printf("Thread returned\n"); 
 	return 0;
 }
 ```
 #### C++20
 ```cpp
 #include <iostream>
+#include <thread>
 using namespace std;
 
+void thread_func() {
+	cout << "Printing from Thread" << endl;
+	return NULL;
+}
+
 int main() {
-	
+	thread thread_obj(thread_func);
+	thread_obj.join();
+	cout << "Thread returned" << endl;
+	return 0;
+}
+```
+```
+output: Printing from Thread
+        Thread returned
+```
+
+## Mutex
+Mutual exclusion functionality. Can be used to serialize access of shared variables between concurrent threads.
+#### C17
+```c
+#include <stdio.h>
+#include <threads.h>
+
+typedef struct data {
+	mtx_t mtx;
+	int x;
+} data;
+
+int thread_func(void* arg) { 
+	data* d = (data*)arg;
+	mtx_lock(&d->mtx);	
+	d->x = 2;	
+	mtx_unlock(&d->mtx);
+	return 0;
+} 
+   
+int main() {
+	data d;
+	mtx_init(&d.mtx, mtx_plain);
+	thrd_t thread_id; 
+	thrd_create(&thread_id, thread_func, (void*)&d); 
+	thrd_join(thread_id, NULL);  // Wait for thread to return before continuing execution
+	printf("x has safely been modified to %d\n", d.x); 
+	return 0;
+}
+```
+#### C++20
+```cpp
+#include <iostream>
+#include <thread>
+#include <mutex>
+using namespace std;
+
+typedef struct data {
+	mutex mtx;
+	int x;
+} data;
+
+void thread_func(data* d) { 
+	const lock_guard<mutex> lock(d->mtx);
+	d->x = 2;	
+	return;
+} 
+   
+int main() {
+	data d;
+	thread thread_obj(thread_func, &d); 
+	thread_obj.join();  // Wait for thread to return before continuing execution
+	cout << "x has safely been modified to " << d.x << endl; 
 	return 0;
 }
 ```
@@ -983,19 +1163,27 @@ Memory can be allocated on the heap, an unreserved and relatively large region o
 #### C17
 ```c
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-
+	int* x = (int*)malloc(sizeof(int)); // pointer to a heap-reserved integer
+	if(x) { // test that the memory was allocated before you use it
+		free(x); // you must manually free any memory you allocated on the heap or it will persist (memory leak)
+	}
 	return 0;
 }
 ```
 #### C++20
 ```cpp
 #include <iostream>
+#include <new>
 using namespace std;
 
 int main() {
-	
+	int* p  = new(int); // pointer to a heap-reserved integer
+	if(p != nullptr) { // test that the memory was allocated before you use it
+		delete p; // you must manually free any memory you allocated on the heap or it will persist (memory leak)
+	}
 	return 0;
 }
 ```
@@ -1005,43 +1193,26 @@ Statements used to explicitly test assumptions made by the programmer. Will be c
 #### C17
 ```c
 #include <stdio.h>
+#include <assert.h>
 
 int main() {
-
+	int x = 1;
+	assert(x == 2); // this should break the execution of the program
 	return 0;
 }
 ```
 #### C++20
 ```cpp
-#include <iostream>
-using namespace std;
+#include <assert.h>
 
 int main() {
-	
+	int x = 1;
+	assert(x == 2); // this should break the execution of the program
 	return 0;
 }
 ```
-
-## Preprocessor
-A text substitution tool, used to instruct the compiler to perform any required macro pre-processing prior to actual compilation.
-#### C17
-```c
-#include <stdio.h>
-
-int main() {
-
-	return 0;
-}
 ```
-#### C++20
-```cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-	
-	return 0;
-}
+output: int main(): Assertion `x == 2' failed. 
 ```
 
 ## Compound Assignment
@@ -1051,7 +1222,9 @@ Provides a shorter syntax for assigning the result of an arithmetic or bitwise o
 #include <stdio.h>
 
 int main() {
-
+	int x = 1;
+	x += 1;
+	printf("x = %d\n", x);
 	return 0;
 }
 ```
@@ -1061,22 +1234,37 @@ int main() {
 using namespace std;
 
 int main() {
-	
+	int x = 1;
+	x += 1;
+	cout << "x = " << x << endl;
 	return 0;
 }
+```
+```
+output: x = 2
 ```
 
 ## Pass by Reference
-An alternative to passing an address to a pointer.
+Use the **&** symbol as an alternative to passing an address by pointer or passing by value.
 #### C++20
 ```cpp
 #include <iostream>
 using namespace std;
 
+void square(int& x) {
+	x *= x;
+	return;
+}
+
 int main() {
-	
+	int x = 2;
+	square(x);
+	cout << x << endl;
 	return 0;
 }
+```
+```
+output: 4
 ```
 
 ## Range
@@ -1131,7 +1319,7 @@ int main() {
 }
 ```
 
-## Constructors / Destructors
+## Constructors & Destructors
 A special member function of a class used to instantiate the class object.
 #### C++20
 ```cpp
