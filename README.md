@@ -52,7 +52,6 @@ Check out the list of examples below to get started.
   * [Encapsulation](#encapsulation)
   * [Inheritance](#inheritance)
   * [Polymorphism](#polymorphism)
-  * [Virtual Functions](#virtual-functions)
   * [Friend Functions](#friend-functions)
   * [Templates](#templates)
   * [Project Structure](#project-structure)
@@ -1502,13 +1501,15 @@ output: 180
         220
 ```
 
-## Polymorphism - Overloading
-Fundamental OOP concept. Allows operations or objects to behave differently in different contexts through compile-time function overloading, by creating more than one function with the same name but different parameters.
+## Polymorphism
+Fundamental OOP concept. Allows operations or objects to behave differently in different contexts.
+### Function Overloading
+Used to facilitate compile-time polymorphism by allowing creation of more than one function with the same name but with different parameters.
 #### C++20
 ```cpp
 ```
-## Polymorphism - Virtual Functions
-Fundamental OOP concept. Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
+### Virtual Functions
+Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
 #### C++20
 ```cpp
 ```
