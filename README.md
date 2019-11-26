@@ -1272,23 +1272,54 @@ Used as a more readable equivalent to a traditional loop when iterating over a r
 #### C++20
 ```cpp
 #include <iostream>
+#include <vector>
 using namespace std;
-
+ 
 int main() {
-	
+	vector<int> v = {0, 1, 2, 3};
+	for(const int& i : v) { // access using const reference
+		cout << i << endl;
+	}
+	int a[] = {4, 5, 6, 7};
+	for(int n : a) { // the initializer can be an array
+		cout << n << endl;
+	}
 	return 0;
 }
 ```
+```
+output: 0
+        1
+        2
+        3
+        4
+        5
+        6
+        7
+```
 
 ## Namespaces
-A declarative region that provides a named scope to its constituent identifiers. Useful for organizing and reducing ambiguity in code.
+A declarative region that provides a named scope to its constituent identifiers. Useful for organizing and reducing ambiguity in code. The scope resolution operator **::** is used to access a scope's contents.
 #### C++20
 ```cpp
 #include <iostream>
 using namespace std;
 
-int main() {
-	
+namespace first_space {
+	void func() {
+		cout << "Called from ns_1" << endl;
+	}
+}
+
+namespace second_space {
+	void func() {
+		cout << "Called from ns_2" << endl;
+	}
+}
+
+int main () {
+	ns_1::func();
+	ns_2::func(); 
 	return 0;
 }
 ```
@@ -1307,7 +1338,7 @@ int main() {
 ```
 
 ## Class Methods
-Functions in a class.
+Functions of a class.
 #### C++20
 ```cpp
 #include <iostream>
