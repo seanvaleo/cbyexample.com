@@ -49,11 +49,11 @@ Check out the list of examples below to get started.
   * [Classes](#classes)
   * [Class Methods](#class-methods)
   * [Constructors & Destructors](#constructors--destructors)
-  * [Virtual Functions](#virtual-functions)
-  * [Friend Functions](#friend-functions)
   * [Encapsulation](#encapsulation)
   * [Inheritance](#inheritance)
-  * [Overloading](#overloading)
+  * [Polymorphism](#polymorphism)
+  * [Virtual Functions](#virtual-functions)
+  * [Friend Functions](#friend-functions)
   * [Templates](#templates)
   * [Project Structure](#project-structure)
 
@@ -1331,8 +1331,16 @@ A user-defined data structure template declared with keyword **class** containin
 #include <iostream>
 using namespace std;
 
+class human {
+	public:
+		int height;
+		int weight;
+};
+
 int main() {
-	
+	human john;
+	john.height = 180;
+	john.weight = 220;
 	return 0;
 }
 ```
@@ -1344,49 +1352,66 @@ Functions of a class.
 #include <iostream>
 using namespace std;
 
+class human {
+	public:
+		int height;
+		int weight;
+		int get_height() const {
+			return height;
+		}
+		int get_weight() const {
+			return weight;
+		}
+};
+
 int main() {
-	
+	human john;
+	john.height = 180;
+	john.weight = 220;
+	cout << john.get_height() << endl;
+	cout << john.get_weight() << endl;
 	return 0;
 }
+```
+```
+output: 180
+        220
 ```
 
 ## Constructors & Destructors
-A special member function of a class used to instantiate the class object.
+A constructor is an optional special member function of a class used to instantiate the class object. It must take the same name as the class, with no return type. A destructor is an optional special member function of a class called in the destruction of a class object. It must take the same name as the class, preceded with **~**, and with no return type.
 #### C++20
 ```cpp
 #include <iostream>
 using namespace std;
 
+class human {
+	public:
+		int height;
+		int weight;
+		human(int h, int w) {
+			height = h;
+			weight = w;
+		}
+		~human();
+		int get_height() const {
+			return height;
+		}
+		int get_weight() const {
+			return weight;
+		}
+};
+
 int main() {
-	
+	human john(180, 220);
+	cout << john.get_height() << endl;
+	cout << john.get_weight() << endl;
 	return 0;
 }
 ```
-
-## Virtual Functions
-Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
-#### C++20
-```cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-	
-	return 0;
-}
 ```
-
-## Friend Functions
-A function of a class defined outside of its scope but with the right to access all private and protected members of the class.
-#### C++20
-```cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-	
-	return 0;
-}
+output: 180
+        220
 ```
 
 ## Encapsulation
@@ -1396,10 +1421,33 @@ Fundamental OOP concept used to group together data and functions, and provide v
 #include <iostream>
 using namespace std;
 
+class human {
+	private: // abstracted from the user
+		int height;
+		int weight;
+	public: 
+		human(int h, int w) {
+			height = h;
+			weight = w;
+		}
+		int get_height() const {
+			return height;
+		}
+		int get_weight() const {
+			return weight;
+		}
+};
+
 int main() {
-	
+	human john(180, 220);
+	cout << john.get_height() << endl;
+	cout << john.get_weight() << endl;
 	return 0;
 }
+```
+```
+output: 180
+        220
 ```
 
 ## Inheritance
@@ -1409,23 +1457,66 @@ Fundamental OOP concept. The capability of a class to derive properties and char
 #include <iostream>
 using namespace std;
 
+class human {
+	public:
+		int height;
+		int weight;
+	public: 
+		human(int h, int w) {
+			height = h;
+			weight = w;
+		}
+		int get_height() const {
+			return height;
+		}
+		int get_weight() const {
+			return weight;
+		}
+};
+
+class adult : public human { // inherit from human class
+	public:
+		adult();
+		string occupation;
+		string get_occupation() const {
+			return occupation;
+		}	
+};
+// Public inheritance: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class
+// Protected inheritance: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class
+// Private inheritance: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class
+
 int main() {
-	
+	adult john;
+	john.height = 180;
+	john.weight = 220;
+	john.occupation = "lawyer";
+	cout << john.get_height() << endl;
+	cout << john.get_weight() << endl;
+	cout << john.get_occupation() << endl;
 	return 0;
 }
 ```
+```
+output: 180
+        220
+```
 
-## Polymorphism
-Fundamental OOP concept. Allows operations or objects to behave differently in different contexts. Through runtime function overriding (using virtual functions) or, as below, through compile-time function overloading by creating more than one function with the same name but different parameters.
+## Polymorphism - Overloading
+Fundamental OOP concept. Allows operations or objects to behave differently in different contexts through compile-time function overloading, by creating more than one function with the same name but different parameters.
 #### C++20
 ```cpp
-#include <iostream>
-using namespace std;
+```
+## Polymorphism - Virtual Functions
+Fundamental OOP concept. Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
+#### C++20
+```cpp
+```
 
-int main() {
-	
-	return 0;
-}
+## Friend Functions
+A function of a class defined outside of its scope but with the right to access all private and protected members of the class.
+#### C++20
+```cpp
 ```
 
 ## Templates
@@ -1435,10 +1526,24 @@ A blueprint for creating a generic class or function. The foundation of generic 
 #include <iostream>
 using namespace std;
 
+template <class T>
+T largest(T x, T y)
+{
+	return (n1 > n2) ? n1 : n2;
+}
+
 int main() {
-	
+	int x, y;
+	cout << "Enter two integers: " << endl;
+	cin >> x >> y;
+	cout << largest(x, y) << endl;
 	return 0;
 }
+```
+```
+input:  2
+        5
+output: 5
 ```
 
 ## Project Structure
