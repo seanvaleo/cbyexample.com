@@ -1475,20 +1475,15 @@ class human {
 
 class adult : public human { // inherit from human class
 	public:
-		adult();
-		string occupation;
+	    adult(int h, int w) : human(h, w) {} // call the base class constructor from this constructor
+	    string occupation;
 		string get_occupation() const {
 			return occupation;
 		}	
 };
-// Public inheritance: If we derive a sub class from a public base class. Then the public member of the base class will become public in the derived class and protected members of the base class will become protected in derived class
-// Protected inheritance: If we derive a sub class from a Protected base class. Then both public member and protected members of the base class will become protected in derived class
-// Private inheritance: If we derive a sub class from a Private base class. Then both public member and protected members of the base class will become Private in derived class
 
 int main() {
-	adult john;
-	john.height = 180;
-	john.weight = 220;
+	adult john(180, 220);
 	john.occupation = "lawyer";
 	cout << john.get_height() << endl;
 	cout << john.get_weight() << endl;
@@ -1507,17 +1502,120 @@ Fundamental OOP concept. Allows operations or objects to behave differently in d
 Used to facilitate compile-time polymorphism by allowing creation of more than one function with the same name but with different parameters.
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
+
+class human {
+	public:
+		int height;
+		float weight;
+		human(int h, int w) {
+			height = h;
+			weight = w;
+		}
+};
+
+int print(int x) {
+	cout << x << endl;
+}
+
+int print(float x) {
+	cout << x  << endl;
+}
+
+int main() {
+	human john(180, 220);
+	print(john.height);
+	print(john.weight);
+	return 0;
+}
 ```
+```
+output: 180
+        220
+```
+
 ### Virtual Functions
 Used to facilitate runtime polymorphism by allowing redefinition of a base class function.
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
+
+class human {
+	public:
+		int height;
+		int weight;
+	public: 
+		human(int h, int w) {
+			height = h;
+			weight = w;
+		}
+		int get_height() const {
+			return height;
+		}
+		int get_weight() const {
+			return weight;
+		}
+		virtual void print_all() = 0; // ()=0 creates a _pure_ virtual function that must be overridden. Alternatively you can just write a default function as a virtual function with no requirement to be overwritten.
+};
+
+class adult : public human { // inherit from human class
+	public:
+	    adult(int h, int w) : human(h, w) {}
+	    string occupation;
+		string get_occupation() const {
+			return occupation;
+		}	
+		void print_all() { // virtual function overridden in derived class
+			cout << height << endl;
+			cout << weight << endl;
+			cout << occupation << endl;
+		}
+};
+
+int main() {
+	adult john(180, 220);
+	john.occupation = "lawyer";
+	john.print_all();
+	return 0;
+}
+```
+```
+output: 180
+        220
+        lawyer
 ```
 
 ## Friend Functions
 A function of a class defined outside of its scope but with the right to access all private and protected members of the class.
 #### C++20
 ```cpp
+#include <iostream>
+using namespace std;
+
+class human {
+	private:
+		int weight;
+	public:
+		human(int w) {
+			weight = w;	    
+		}
+		friend int get_weight(human h);
+};
+
+int get_weight(human h) {
+	return h.weight; // we can access the private members of the associated class thanks to the friend function
+}
+
+int main() {
+	human john(220);
+	cout << get_weight(john) << endl;
+	return 0;
+}
+```
+```
+output: 220
 ```
 
 ## Templates
