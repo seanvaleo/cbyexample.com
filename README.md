@@ -432,10 +432,11 @@ int main(int argc, char* argv[]) {
 #### C++20
 ```cpp
 #include <iostream>
+using namespace std;
 
 int main(int argc, char* argv[]) {
 	for(auto i = 0; i < argc; i++) {
-		printf("%s\n", argv[i]);
+		cout << argv[i] << endl;
 	}
 	return 0;
 }
@@ -884,28 +885,6 @@ Bitwise operators are used to perform bit-level operations.
 #include <stdio.h>
 
 int main() {
-
-	return 0;
-}
-```
-#### C++20
-```cpp
-#include <iostream>
-using namespace std;
-
-int main() {
-	
-	return 0;
-}
-```
-
-## Typedef
-#### C17
-Used to add an additional name to a type. Useful when working with more complex types, making them more human readable.
-```c
-#include <stdio.h>
-
-int main() {
 	unsigned char a = 5; // 00000101
 	unsigned char b = 9; // 00001001
 	printf("a & b = %d\n", a & b); // 00000001
@@ -942,6 +921,29 @@ output: a & b = 1
         b << 1 = 18
         b >> 1 = 4
 ```
+
+## Typedef
+Used to add an additional name to a type. Useful when working with more complex types, making them more human readable.
+#### C17
+```c
+#include <stdio.h>
+
+int main() {
+
+	return 0;
+}
+```
+#### C++20
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+	
+	return 0;
+}
+```
+
 ## Enumerations
 A user-defined data type, used to assign names to integral constants to make a program easier to read and maintain.
 #### C17
