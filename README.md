@@ -6,6 +6,8 @@ C and C++ are general-purpose computer programming languages. They are closely r
 This guide intends to showcase some of the features and differences of both languages in a user-friendly, progressive format.
 This is not a substitution for in-depth study, but should serve well as an introduction or a refresher.
 
+Inspired by <a href="https://gobyexample.com" target="_blank">Go By Example</a>, <a href="https://lotz84.github.io/haskellbyexample/" target="_blank">Haskell By Example</a>, <a href="http://jpryan.me/dartbyexample/" target="_blank">Dart By Example</a> and <a href="https://javscriptbyexample.com" target="_blank">Javascript By Example</a>.
+
 Check out the list of examples below to get started.
 
   * [Hello World](#hello-world)
