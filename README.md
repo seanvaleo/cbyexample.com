@@ -930,8 +930,10 @@ Used to add an additional name to a type. Useful when working with more complex 
 ```c
 #include <stdio.h>
 
-int main() {
+typedef unsigned char byte;
 
+int main() {
+	byte b1 = 'c';
 	return 0;
 }
 ```
@@ -940,8 +942,10 @@ int main() {
 #include <iostream>
 using namespace std;
 
+typedef unsigned char byte;
+
 int main() {
-	
+	byte b1 = 'c';
 	return 0;
 }
 ```
@@ -1308,13 +1312,13 @@ A declarative region that provides a named scope to its constituent identifiers.
 #include <iostream>
 using namespace std;
 
-namespace first_space {
+namespace ns_1 {
 	void func() {
 		cout << "Called from ns_1" << endl;
 	}
 }
 
-namespace second_space {
+namespace ns_2 {
 	void func() {
 		cout << "Called from ns_2" << endl;
 	}
@@ -1653,21 +1657,23 @@ output: 5
 It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
 #### C17
 ```
-src/myproject/main.c // main function
-src/myproject/include/file.c // function definitions
-src/myproject/include/file.h // structs, function prototypes
-src/myproject/makefile // automated project build file
-src/myproject/README.md // store any useful documentation or links to documentation in here
-bin/file // executable output from compiler
+myproject/main.c // main function
+myproject/include/file.c // function definitions
+myproject/include/file.h // structs, function prototypes
+myproject/makefile // automated project build file
+myproject/README.md // store any useful documentation or links to documentation in here
+myproject/obj/file // temporary object files
+myproject/bin/file // executable output from compiler
 ```
 #### C++20
 ```
-src/myproj/main.cpp // main function
-src/myproj/include/file.cpp // function definitions
-src/myproj/include/file.hpp // classes, function prototypes
-src/myproj/makefile // automated project build file
-src/myproject/README.md // store any useful documentation or links to documentation in here
-bin/file // executable output from compiler
+myproject/main.cpp // main function
+myproject/include/file.cpp // function definitions
+myproject/include/file.hpp // classes, function prototypes
+myproject/makefile // automated project build file
+myproject/README.md // store any useful documentation or links to documentation in here
+myproject/obj/file // temporary object files
+myprobect/bin/file // executable output from compiler
 ```
 
 Copyright &copy; 2020 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
