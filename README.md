@@ -62,6 +62,9 @@ C++ only:
   * [Polymorphism](#polymorphism)
   * [Friend Functions](#friend-functions)
   * [Templates](#templates)
+  * [Structured Bindings](#structured-bindings)
+  * [Lambda Expressions](#lambda-expressions)
+  * [Exception Handling](#exception-handling)
 
 ## Hello World
 #### C17
@@ -133,13 +136,15 @@ int main() {
 ```
 #### C++20
 ```cpp
+#include <string>
+
 int main() {
 	int a = 0; // C-like initialization
 	int b {0}; // Uniform initialization. Does not allow narrowing conversions.
 	int c(0); // Constructor initialization
 	char greeting_a[6] = {'H','e','l','l','o','\0'};
 	char greeting_b[] = "Hello";
-	char* greeting_c = "Hello";
+	std::string greeting_c = "Hello";
 	return 0;
 }
 ```
@@ -254,7 +259,7 @@ int main() {
 #include <string>
 
 int main() {
-	string str1 = "Hello";
+	std::string str1 = "Hello";
 	return 0;
 }
 ```
@@ -364,7 +369,7 @@ int main() {
 int main() {
 	auto x = 1;
 	while(x <= 3) {
-		std::cout << x << std::endl;
+		std::cout << x++ << std::endl;
 	}
 	return 0;
 }
@@ -482,7 +487,6 @@ int main() {
 int main() {
 	extern int a; // defined elsewhere
 	static int b; // hold value between invocations
-	register int c; // store in CPU register for fast access
 	return 0;
 }
 ```
@@ -498,15 +502,15 @@ int main() {
 	volatile int d; // Can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
 	return 0;
 }
-
 ```
 #### C++20
 ```cpp
+#include <atomic>
+
 int main() {
-	restrict int* a; // a should only be accessed from this pointer
-	const int b; // b, once defined, is constant and cannot be changed
-	atomic int c; // c can only be modified by one thread at a time
-	volatile int d; // d can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
+	const int a = 1; // a, once defined, is constant and cannot be changed
+	std::atomic<int> b; // b can only be modified by one thread at a time
+	volatile int c; // c can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
 	return 0;
 }
 ```
@@ -546,7 +550,7 @@ int main() {
 }
 ```
 ```
-output: 5
+output: 25
 ```
 
 ## Conditional If
@@ -623,9 +627,12 @@ int main() {
 
 int main() {
 	int x = 5;
-	std::cout << "The address of x is" << &x << std::endl;
+	std::cout << "The address of x is " << &x << std::endl;
 	return 0;
 }
+```
+```
+output: The address of x is 0x7ffd7b254c2c
 ```
 
 ## Dereference Operator
@@ -637,7 +644,7 @@ Use '\*' before a variable name to use the value it points to rather than the ad
 int main() {
 	int x = 4;
 	int* y = &x;
-	printf("the value stored at x is %d\n", *y);
+	printf("The value stored at x is %d\n", *y);
 	return 0;
 }
 ```
@@ -648,9 +655,12 @@ int main() {
 int main() {
 	int x = 4;	
 	int* y = &x;
-	std::cout << "the value stored at x is" << *y << std::endl;
+	std::cout << "The value stored at x is " << *y << std::endl;
 	return 0;
 }
+```
+```
+output: The value stored at x is 4
 ```
 
 ## Pointers
@@ -699,19 +709,19 @@ int main() {
 int main() {
 	int x[5];
 	int* x_ptr = &x[0];
-	std::cout << "Value of x_ptr = " << &x_ptr << std::endl;
-	std::cout << "Value of x_ptr + 1 = " << &(x_ptr + 1) << std::endl;
+	std::cout << "Value of x_ptr = " << x_ptr << std::endl;
+	std::cout << "Value of x_ptr + 1 = " << x_ptr + 1 << std::endl;
 	char y[5];
 	char* y_ptr = &y[0];
-	std::cout << "Value of y_ptr = " << &y_ptr << std::endl;
-	std::cout << "Value of y_ptr + 1 = " << &(y_ptr + 1) << std::endl;
+	std::cout << "Value of y_ptr = " << y_ptr << std::endl;
+	std::cout << "Value of y_ptr + 1 = " << y_ptr + 1 << std::endl;
 	return 0;
 }
 ```
 ```
 Output: Value of x_ptr = 492316
-        Value of y_ptr = 492303
         Value of x_ptr + 1 = 492320
+        Value of y_ptr = 492303
         Value of y_ptr + 1 = 492304
 ```
 
@@ -860,7 +870,7 @@ int main() {
 output: a & b = 1
         a | b = 13
         a ^ b = 12
-        ~a = 250
+        ~a = -6
         b << 1 = 18
         b >> 1 = 4
 ```
@@ -907,9 +917,8 @@ enum week {
 };
 
 int main() {
-	for(int i = mon; i <= sun; i++)
-	{
-		printf("%d ", i); 
+	for(int i = mon; i <= sun; i++)	{
+		printf("%d\n", i); 
 	} 
 	return 0;
 }
@@ -929,8 +938,7 @@ enum week {
 };
 
 int main() {
-	for(int i = mon; i <= sun; i++)
-	{
+	for(int i = mon; i <= sun; i++)	{
 		std::cout << i << std::endl; 
 	} 
 	return 0;
@@ -938,7 +946,7 @@ int main() {
 ```
 ```
 output: 0
-        1
+		1
         2
         3
         4
@@ -970,13 +978,14 @@ int sum(int count, ...)
 int main() {
 	int numbers[3] = {5, 10, 15};
 	int sum_of_numbers = sum(3, numbers[0], numbers[1], numbers[2]);
-	printf("Sum of the array %d\n", sum_of_numbers);
+	printf("Sum of the array: %d\n", sum_of_numbers);
 	return 0;
 }
 ```
 #### C++20
 ```cpp
 #include <iostream>
+#include <cstdarg>
 
 int sum(int count, ...)
 {
@@ -995,12 +1004,12 @@ int sum(int count, ...)
 int main() {
 	int numbers[3] = {5, 10, 15};
 	int sum_of_numbers = sum(3, numbers[0], numbers[1], numbers[2]);
-	std::cout << "Sum of the array << sum_of_numbers << std::endl;
+	std::cout << "Sum of the array: " << sum_of_numbers << std::endl;
 	return 0;
 }
 ```
 ```
-output: 30
+output: Sum of the array: 30
 ```
 
 ## Threads
@@ -1120,7 +1129,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-#include <new>
 
 int main() {
 	int* p  = new(int); // pointer to a heap-reserved integer
@@ -1385,6 +1393,10 @@ int main () {
 	return 0;
 }
 ```
+```
+output: Called from ns_1
+        Called from ns_2
+```
 
 ## Classes
 A user-defined data structure template declared with keyword **class** containing member functions and data.
@@ -1452,7 +1464,7 @@ class human {
 			height = h;
 			weight = w;
 		}
-		~human();
+		~human(){};
 		int get_height() const {
 			return height;
 		}
@@ -1534,8 +1546,8 @@ class human {
 class adult : public human { // inherit from human class
 	public:
 	    adult(int h, int w) : human(h, w) {} // call the base class constructor from this constructor
-	    string occupation;
-		string get_occupation() const {
+	    std::string occupation;
+		std::string get_occupation() const {
 			return occupation;
 		}	
 };
@@ -1552,6 +1564,7 @@ int main() {
 ```
 output: 180
         220
+		lawyer
 ```
 
 ## Polymorphism
@@ -1619,8 +1632,8 @@ class human {
 class adult : public human { // inherit from human class
 	public:
 	    adult(int h, int w) : human(h, w) {}
-	    string occupation;
-		string get_occupation() const {
+	    std::string occupation;
+		std::string get_occupation() const {
 			return occupation;
 		}	
 		void print_all() { // virtual function overridden in derived class
@@ -1680,8 +1693,7 @@ A blueprint for creating a generic class or function. The foundation of generic 
 #include <iostream>
 
 template <class T>
-T largest(T x, T y)
-{
+T largest(T n1, T n1) {
 	return (n1 > n2) ? n1 : n2;
 }
 
@@ -1699,5 +1711,77 @@ input:  2
 output: 5
 ```
 
-Copyright &copy; 2020 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+## Structured Bindings
+A convenient way to declare multiple variables initialized from a tuple, pair or struct. Often used to capture multiple return values from a function.
+#### C++20
+```cpp
+#include <iostream>
+  
+struct Point {
+    int x;
+    int y;
+};
+  
+int main() {
+    Point p = {1, 2};
+    auto[x, y] = p; // Creates and initializes x and y variables
+    std::cout << x << std::endl;
+    std::cout << y << std::endl;     
+    return 0;
+}
+```
+```
+output: 1
+        2
+```
 
+## Lambda Expressions
+Also referred to as Lambda Functions. A simplified notation for defining and using an anonymous function object, capable of capturing variables in scope.
+#### C++20
+```cpp
+#include <iostream>
+
+int main() {
+	int x = 1;
+	auto multiply = [&x](int y)->int{ // Anonymous function takes a reference to x. Returns an int
+    	return x*y;
+	};
+	std::cout << multiply(5) << std::endl;
+	x = 2;
+	std::cout << multiply(5) << std::endl;
+	return 0;
+}
+```
+```
+output: 5
+        10
+```
+
+## Exception Handling
+A mechanism to handle runtime errors by transferring control from one part of a program to another.
+#### C++20
+```cpp
+#include <iostream>
+
+double divide(double dividend, double divisor) {
+    if (divisor == 0) {
+            throw "Cannot divide by 0\n"; // If divisor is 0, throw this error
+    }
+    return dividend / divisor;
+}
+
+int main() {
+    try {
+        std::cout << divide(10, 0) << std::endl;
+
+    } catch (const char *err) {
+        std::cout << err << std::endl;
+    }
+    return 0;
+}
+```
+```
+output: Cannot divide by 0
+```
+
+Copyright &copy; 2020 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
