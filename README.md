@@ -8,7 +8,7 @@ This is not a substitution for in-depth study, but should serve well as an intro
 
 Inspired by <a href="https://gobyexample.com" target="_blank">Go By Example</a>, <a href="https://lotz84.github.io/haskellbyexample/" target="_blank">Haskell By Example</a>, <a href="http://jpryan.me/dartbyexample/" target="_blank">Dart By Example</a> and <a href="https://javascriptbyexample.com" target="_blank">Javascript By Example</a>.
 
-Check out the list of examples below to get started.
+Check out the list of examples below to get started:
 
   * [Hello World](#hello-world)
   * [Types](#types)
@@ -23,7 +23,6 @@ Check out the list of examples below to get started.
   * [Goto](#goto)
   * [Integer Promotion](#integer-promotion)
   * [Program Arguments](#program-arguments)
-  * [Modules](#modules)
   * [Storage Class Specifiers](#storage-class-specifiers)
   * [Type Qualifiers](#type-qualifiers)
   * [Inline Functions](#inline-functions)
@@ -45,6 +44,13 @@ Check out the list of examples below to get started.
   * [Heap Allocation](#heap-allocation)
   * [Assertions](#assertions)
   * [Compound Assignment](#compound-assignment)
+  * [Project Structure](#project-structure)
+  * [Includes](#includes)
+  * [Compilation](#compilation)
+
+C++ only:
+
+  * [Modules](#modules)
   * [Pass by Reference](#pass-by-reference)
   * [Range](#range)
   * [Namespaces](#namespaces)
@@ -56,9 +62,6 @@ Check out the list of examples below to get started.
   * [Polymorphism](#polymorphism)
   * [Friend Functions](#friend-functions)
   * [Templates](#templates)
-  * [Project Structure](#project-structure)
-  * [Includes](#includes)
-  * [Compilation](#compilation)
 
 ## Hello World
 #### C17
@@ -460,37 +463,6 @@ input: ./program arg1 arg2
 output: program
         arg1
         arg2
-```
-
-## Modules
-Modules are a new method in C++ to allow for better package management and easier library integration.
-#### C++20
-In file foo.cpp:
-```cpp
-export module Foo;
-
-namespace Bar {
-	int f_internal() {
-	        return 10;
-	}
-
-	export int f() {
-		return f_internal();
-	}
-}
-```
-In file main.cpp:
-```cpp
-import std;
-import Foo;
-
-int main() {
-	std::cout << Bar::f() << std::endl;
-	return 0;
-}
-```
-```
-output: 10
 ```
 
 ## Storage Class Specifiers
@@ -1214,6 +1186,129 @@ int main() {
 output: x = 2
 ```
 
+## Project Structure
+It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
+#### C17
+```
+myproject/src/main.c // main function
+myproject/include/file.c // function definitions etc
+myproject/include/file.h // structs, function prototypes etc
+myproject/Makefile // automated project build file
+myproject/README.md // store any useful documentation or links to documentation in here
+myproject/obj/file // temporary object files
+myproject/bin/file // executable output from compiler
+```
+#### C++20
+```
+myproject/src/main.cpp // main function
+myproject/include/file.cpp // function definitions etc
+myproject/include/file.hpp // classes, function prototypes etc
+myproject/Makefile // automated project build file
+myproject/README.md // store any useful documentation or links to documentation in here
+myproject/obj/file // temporary object files
+myprobect/bin/file // executable output from compiler
+```
+
+## Includes
+Includes are instructions to the preprocessor to include external code. External code is made up of at least a header file (interface) and a source file (implementation).
+
+When compiling your program, **#include** the header, and link the source file at compile time.
+#### C17
+In file src/main.c
+```c
+#include <stdio.h> // Include a dependency from the system library
+#include "../include/file.h" // Include a local dependency from a relative path
+
+int main() {
+	// Use file.h
+}
+```
+In file include/file.c:
+```c
+#include <stdio.h> // Include a dependency from the system library
+#include "file.h" // Include a local dependency from a relative path
+```
+In file include/file.h:
+```c
+#ifndef PROG_H // Only process the below if it hasn't already been processed in the current compilation.
+#define PROG_H
+
+// File contents here
+
+#endif
+```
+#### C++20
+In file src/main.cpp
+```c
+#include <iostream> // Include a dependency from the system library
+#include "../include/file.hpp" // Include a local dependency from a relative path
+
+int main() {
+	// Use file.hpp
+}
+```
+In file include/file.cpp:
+```cpp
+#include <iostream> // Include a dependency from the system library
+#include "file.hpp" // Include a local dependency from a relative path
+```
+In file include/file.hpp:
+```cpp
+#ifndef PROG_HPP // Only process the below if it hasn't already been processed in the current compilation.
+#define PROG_HPP
+
+// File contents here
+
+#endif
+```
+
+## Compilation
+Compiling source code turns it into machine language through preprocessing, compiling, assembly and linking.
+
+#### C17
+```
+gcc -c -std=c17 src/main.c -o obj/main.o // Compile main.c to object
+gcc -c -std=c17 include/file.c -o obj/file.o // Compile file.c to object
+gcc obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
+```
+#### C++20
+```
+g++ -c -std=c++20 src/main.cpp -o obj/main.o // Compile main.cpp to object
+g++ -c -std=c++20 include/file.cpp -o obj/file.o // Compile file.cpp to object
+g++ obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
+```
+
+## Modules
+Modules are a new method in C++ to allow for better package management and easier library integration.
+#### C++20
+In file foo.cpp:
+```cpp
+export module Foo;
+
+namespace Bar {
+	int f_internal() {
+	        return 10;
+	}
+
+	export int f() {
+		return f_internal();
+	}
+}
+```
+In file main.cpp:
+```cpp
+import std;
+import Foo;
+
+int main() {
+	std::cout << Bar::f() << std::endl;
+	return 0;
+}
+```
+```
+output: 10
+```
+
 ## Pass by Reference
 Use the **&** symbol as an alternative to passing an address by pointer or passing by value.
 #### C++20
@@ -1602,98 +1697,6 @@ int main() {
 input:  2
         5
 output: 5
-```
-
-## Project Structure
-It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
-#### C17
-```
-myproject/src/main.c // main function
-myproject/include/file.c // function definitions etc
-myproject/include/file.h // structs, function prototypes etc
-myproject/Makefile // automated project build file
-myproject/README.md // store any useful documentation or links to documentation in here
-myproject/obj/file // temporary object files
-myproject/bin/file // executable output from compiler
-```
-#### C++20
-```
-myproject/src/main.cpp // main function
-myproject/include/file.cpp // function definitions etc
-myproject/include/file.hpp // classes, function prototypes etc
-myproject/Makefile // automated project build file
-myproject/README.md // store any useful documentation or links to documentation in here
-myproject/obj/file // temporary object files
-myprobect/bin/file // executable output from compiler
-```
-
-## Includes
-Includes are instructions to the preprocessor to include external code. External code is made up of at least a header file (interface) and a source file (implementation).
-
-When compiling your program, **#include** the header, and link the source file at compile time.
-#### C17
-In file src/main.c
-```c
-#include <stdio.h> // Include a dependency from the system library
-#include "../include/file.h" // Include a local dependency from a relative path
-
-int main() {
-	// Use file.h
-}
-```
-In file include/file.c:
-```c
-#include <stdio.h> // Include a dependency from the system library
-#include "file.h" // Include a local dependency from a relative path
-```
-In file include/file.h:
-```c
-#ifndef PROG_H // Only process the below if it hasn't already been processed in the current compilation.
-#define PROG_H
-
-// File contents here
-
-#endif
-```
-#### C++20
-In file src/main.cpp
-```c
-#include <iostream> // Include a dependency from the system library
-#include "../include/file.hpp" // Include a local dependency from a relative path
-
-int main() {
-	// Use file.hpp
-}
-```
-In file include/file.cpp:
-```cpp
-#include <iostream> // Include a dependency from the system library
-#include "file.hpp" // Include a local dependency from a relative path
-```
-In file include/file.hpp:
-```cpp
-#ifndef PROG_HPP // Only process the below if it hasn't already been processed in the current compilation.
-#define PROG_HPP
-
-// File contents here
-
-#endif
-```
-
-## Compilation
-Compiling source code turns it into machine language through preprocessing, compiling, assembly and linking.
-
-#### C17
-```
-gcc -c -std=c17 src/main.c -o obj/main.o // Compile main.c to object
-gcc -c -std=c17 include/file.c -o obj/file.o // Compile file.c to object
-gcc obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
-```
-#### C++20
-```
-g++ -c -std=c++20 src/main.cpp -o obj/main.o // Compile main.cpp to object
-g++ -c -std=c++20 include/file.cpp -o obj/file.o // Compile file.cpp to object
-g++ obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
 ```
 
 Copyright &copy; 2020 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
