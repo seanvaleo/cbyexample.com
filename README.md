@@ -1564,7 +1564,7 @@ int main() {
 ```
 output: 180
         220
-		lawyer
+        lawyer
 ```
 
 ## Polymorphism
