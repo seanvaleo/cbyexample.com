@@ -1,0 +1,28 @@
+
+
+test all c++
+
+copy constructor
+smart pointers
+base member initialization
+map
+vector
+structured bindings
+exception handling
+lambdas
+
+
+
+
+
+done:
+pointer arithmetic. use an array.
+mutex - c++:    ; // simpler
+switch - re-format cases
+array - sizeof() is wrong for length
+update include section
+add compilation section
+remove 'using namespace std'
+initialization in own section
+update table of contents
+test all c

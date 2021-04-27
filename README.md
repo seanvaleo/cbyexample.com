@@ -12,6 +12,7 @@ Check out the list of examples below to get started.
 
   * [Hello World](#hello-world)
   * [Types](#types)
+  * [Initialization](#Initialization)
   * [Comments](#comments)
   * [Switch](#switch)
   * [Array](#array)
@@ -22,7 +23,6 @@ Check out the list of examples below to get started.
   * [Goto](#goto)
   * [Integer Promotion](#integer-promotion)
   * [Program Arguments](#program-arguments)
-  * [Includes](#includes)
   * [Modules](#modules)
   * [Storage Class Specifiers](#storage-class-specifiers)
   * [Type Qualifiers](#type-qualifiers)
@@ -57,6 +57,8 @@ Check out the list of examples below to get started.
   * [Friend Functions](#friend-functions)
   * [Templates](#templates)
   * [Project Structure](#project-structure)
+  * [Includes](#includes)
+  * [Compilation](#compilation)
 
 ## Hello World
 #### C17
@@ -71,10 +73,9 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
-	cout << "Hello World!" << endl;
+	std::cout << "Hello World!" << std::endl;
 	return 0;
 }
 ```
@@ -90,15 +91,13 @@ Every variable has an associated data type that defines its data storage format.
 
 int main() {
 	int a; // Integer
-	int b = 1; // You can initialize a variable when you declare it.
-	unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	unsigned int b; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	char c; // Character
 	short d; // Short integer
 	long e; // Long integer
 	float f; // Floating point integer
 	double g; // Double-precision floating point integer
 	bool h; // Boolean TRUE or FALSE
-	char i; // Character
-	void j; // No type
 	return 0;
 }
 ```
@@ -106,16 +105,38 @@ int main() {
 ```cpp
 int main() {
 	int a; // Integer
-	int b = 1; // You can initialize a variable when you declare it.
-	unsigned int c; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	unsigned int b; // Unsigned integers only store positive numbers. As a result, they have a higher positive range.
+	char c; // Character
 	short d; // Short integer
 	long e; // Long integer
 	float f; // Floating point integer
 	double g; // Double-precision floating point integer
 	bool h; // Boolean TRUE or FALSE
-	char i; // Character
-	void j; // No type
 	auto k = 1; // Automatically infer type. Not a type in itself.
+	return 0;
+}
+```
+
+## Initialization
+#### C17
+```c
+int main() {
+	int a = 0;
+	char greeting_a[6] = {'H','e','l','l','o','\0'};
+	char greeting_b[] = "Hello";
+	char* greeting_c = "Hello";
+	return 0;
+}
+```
+#### C++20
+```cpp
+int main() {
+	int a = 0; // C-like initialization
+	int b {0}; // Uniform initialization. Does not allow narrowing conversions.
+	int c(0); // Constructor initialization
+	char greeting_a[6] = {'H','e','l','l','o','\0'};
+	char greeting_b[] = "Hello";
+	char* greeting_c = "Hello";
 	return 0;
 }
 ```
@@ -140,13 +161,13 @@ Jump to a matching value. Usually cleaner to write than an if/else tree, and fas
 int main() {
 	int x = 2;
 	switch(x) {
-		case 1:
-		printf("One")
+	case 1:
+		printf("One");
 		break; // You must break the search or it will fall through to the next match.
-		case 2:
-		printf("Two")
+	case 2:
+		printf("Two");
 		break;
-		default: // If no match is found.
+	default: // If no match is found.
 		break;
 	}
 	return 0;
@@ -155,18 +176,17 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x = 2;
 	switch(x) {
-		case 1:
-		cout << "One" << endl;
+	case 1:
+		std::cout << "One" << std::endl;
 		break; // You must break the search or it will fall through to the next match.
-		case 2:
-		cout << "Two" << endl;
+	case 2:
+		std::cout << "Two" << std::endl;
 		break;
-		default: // If no match is found.
+	default: // If no match is found.
 		break;
 	}
 	return 0;
@@ -184,9 +204,10 @@ An array is a collection of items stored at contiguous memory locations. Element
 
 int main() {
 	int my_array[5];
-	int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
+	int my_array_b[] = {0,1,2,3,4}; // You can init the array from it's elements. Size can be detected automatically here.
 
-	for(size_t i = 0; i < sizeof(my_array); i++) {
+    size_t len = sizeof(my_array) / sizeof(my_array[0]);
+	for(size_t i = 0; i < len; i++) {
 		my_array[i] = i;
 	}
 
@@ -197,17 +218,16 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
+#include <array>
 
 int main() {
-	int my_array[5];
-	int my_array_b[] = {0,1,2,3,4}; // You can init the array with it's elements. Size can be detected automatically here.
+	std::array<int, 5> my_array;
 
-	for(size_t i = 0; i < sizeof(my_array); i++) {
+	for(size_t i = 0; i < my_array.size(); i++) {
 		my_array[i] = i;
 	}
 
-	cout << my_array[2] << endl;
+	std::cout << my_array[2] << std::endl;
 	return 0;
 }
 ```
@@ -222,8 +242,6 @@ A string is an array of characters. C++ supports **string** types natively, but 
 #include <stdio.h>
 
 int main() {
-	char greeting_a[6] = {'H','e','l','l','o','\0'};
-	char greeting_b[] = "Hello";
 	char* greeting_c = "Hello";
 	return 0;
 }
@@ -231,11 +249,9 @@ int main() {
 #### C++20
 ```cpp
 #include <string>
-using namespace std;
 
 int main() {
 	string str1 = "Hello";
-	auto str1 = "Hello";
 	return 0;
 }
 ```
@@ -268,7 +284,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 // Double the number passed in as 'x', returning the new value to the function caller.
 int double_number_a(int x) {
@@ -282,10 +297,10 @@ void double_number_b(int* x) {
 
 int main() {
 	auto num = 5;
-	cout << double_number_a(num) << endl;
-	cout << num << endl;
+	std::cout << double_number_a(num) << std::endl;
+	std::cout << num << std::endl;
 	double_number_b(&num);
-	cout << num << endl;
+	std::cout << num << std::endl;
 	return 0;
 }
 ```
@@ -311,11 +326,10 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	for (auto i = 1; i <= 3; i++) {
-		cout << i << endl;
+		std::cout << i << std::endl;
 	}
 	return 0;
 }
@@ -343,12 +357,11 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	auto x = 1;
 	while(x <= 3) {
-		cout << x << endl;
+		std::cout << x << std::endl;
 	}
 	return 0;
 }
@@ -368,7 +381,7 @@ Used to jump between code sections. The use of **goto** is contraversial as it c
 int main() {
 	int x;
 	scanf("%d", &x);
-	if(x < 3) goto cleanup;
+	if (x < 3) goto cleanup;
 	// Program code here
 	cleanup:
 	return 0;
@@ -377,12 +390,11 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x;
-	cin >> x;
-	if(x < 3) goto cleanup;
+	std::cin >> x;
+	if (x < 3) goto cleanup;
 	// Program code here
 	cleanup:
 	return 0;
@@ -397,7 +409,7 @@ Any operand whose type ranks lower than int is temporarily promoted to int or un
 
 int main() {
 	char x = 'A';
-	if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
+	if (x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
 	else printf("Greater than or equal to\n");
 	return 0;
 }
@@ -405,12 +417,11 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	auto x = 'A';
-	if(x < 'a') printf("Less than\n"); // x is promoted to int to compare it with the integer value of 'a'.
-	else printf("Greater than or equal to\n");
+	if (x < 'a') std::cout << "Less than" << std::endl; // x is promoted to int to compare it with the integer value of 'a'.
+	else std::cout << "Greater than or equal to" << std::endl;
 	return 0;
 }
 ```
@@ -434,11 +445,10 @@ int main(int argc, char* argv[]) {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main(int argc, char* argv[]) {
 	for(auto i = 0; i < argc; i++) {
-		cout << argv[i] << endl;
+		std::cout << argv[i] << std::endl;
 	}
 	return 0;
 }
@@ -450,41 +460,6 @@ input: ./program arg1 arg2
 output: program
         arg1
         arg2
-```
-
-## Includes
-Includes are instructions to the preprocessor to include external code. External code is made up of at least a header file (interface) and a source file (implementation).
-
-When compiling your program, **#include** the header, and link the source file at compile time.
-#### C17
-In file main.c:
-```c
-#include <stdio.h> // Include a dependency from the system library
-#include "prog.h" // Include a local dependency from a relative path
-```
-In file prog.h:
-```c
-#ifndef PROG_H // Only process the below if it hasn't already been processed in the current compilation.
-#define PROG_H
-
-// File contents here
-
-#endif
-```
-#### C++20
-In file main.cpp:
-```cpp
-#include <iostream> // Include a dependency from the system library
-#include "prog.hpp" // Include a local dependency from a relative path
-```
-In file prog.hpp:
-```cpp
-#ifndef PROG_HPP // Only process the below if it hasn't already been processed in the current compilation.
-#define PROG_HPP
-
-// File contents here
-
-#endif
 ```
 
 ## Modules
@@ -508,10 +483,9 @@ In file main.cpp:
 ```cpp
 import std;
 import Foo;
-using namespace std;
 
 int main() {
-	cout << Bar::f() << endl;
+	std::cout << Bar::f() << std::endl;
 	return 0;
 }
 ```
@@ -524,19 +498,19 @@ Define the storage duration of an object.
 #### C17
 ```c
 int main() {
-	auto int x; // automatic duration - scope lifetime
-	extern int x; // defined elsewhere
-	static int x; // hold value between invocations
-	register int x; // store in CPU register for fast access
+	extern int a; // defined elsewhere
+	static int b; // hold value between invocations
+	register int c; // store in CPU register for fast access
+	auto int d; // automatic duration - scope lifetime
 	return 0;
 }
 ```
 #### C++20
 ```cpp
 int main() {
-	extern int x; // defined elsewhere
-	static int x; // hold value between invocations
-	register int x; // store in CPU register for fast access
+	extern int a; // defined elsewhere
+	static int b; // hold value between invocations
+	register int c; // store in CPU register for fast access
 	return 0;
 }
 ```
@@ -546,10 +520,10 @@ A way of expressing additional information about a value through the type system
 #### C17
 ```c
 int main() {
-	restrict int* x; // x should only be accessed from this pointer
-	const int x; // x, once defined, is constant and cannot be changed
-	atomic int x; // x can only be modified by one thread at a time
-	volatile int x; // x can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
+	restrict int* a; // Should only be accessed from this pointer
+	const int b; // Once defined, is constant and cannot be changed
+	atomic int c; // Can only be modified by one thread at a time
+	volatile int d; // Can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
 	return 0;
 }
 
@@ -557,10 +531,10 @@ int main() {
 #### C++20
 ```cpp
 int main() {
-	restrict int* x; // x should only be accessed from this pointer
-	const int x; // x, once defined, is constant and cannot be changed
-	atomic int x; // x can only be modified by one thread at a time
-	volatile int x; // x can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
+	restrict int* a; // a should only be accessed from this pointer
+	const int b; // b, once defined, is constant and cannot be changed
+	atomic int c; // c can only be modified by one thread at a time
+	volatile int d; // d can be modified externally. the program will check x's value before using it, even if it hasn't been modified locally.
 	return 0;
 }
 ```
@@ -571,7 +545,7 @@ Directly include the given function in the caller code sequence. This ensures th
 ```c
 #include <stdio.h>
 
-inline void square(int* x) {
+static inline void square(int* x) {
 	*x *= *x;
 	return;
 }
@@ -586,7 +560,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 inline void square(int& x) {
 	x *= x;
@@ -596,7 +569,7 @@ inline void square(int& x) {
 int main() {
 	int num = 5;
 	square(num);
-	cout << num << endl;
+	std::cout << num << std::endl;
 	return 0;
 }
 ```
@@ -612,10 +585,10 @@ Responsible for modifying the flow of execution in a program. Always used with a
 
 int main() {
 	int x = 4;
-	if(!x) printf("x is 0\n"); // one line if statement
-	else if(x < 0) printf("x is negative\n");
+	if (!x) printf("x is 0\n"); // one line if statement
+	else if (x < 0) printf("x is negative\n");
 	else { // or you can use a block			
-		printf("x is positive\n", x);
+		printf("x is positive\n");
 	}
 	return 0;
 }
@@ -623,13 +596,12 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
-	if(int x = 4 ; !x) cout << "x is 0" << endl; // one line if statement with optional init statement before condition
-	else if(x < 0) cout << "x is negative" << endl;
+	if (int x = 4 ; !x) std::cout << "x is 0" << std::endl; // one line if statement with optional init statement before condition
+	else if (x < 0) std::cout << "x is negative" << std::endl;
 	else { // or you can use a block
-		cout << "x is positive" << endl;
+		std::cout << "x is positive" << std::endl;
 	}	
 	return 0;
 }
@@ -653,11 +625,10 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x = 4;
-	x < 0 ? cout << "x is negative" << endl : cout << "x is 0 or positive" << endl;
+	x < 0 ? std::cout << "x is negative" << std::endl : std::cout << "x is 0 or positive" << std::endl;
 	return 0;
 }
 ```
@@ -677,11 +648,10 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x = 5;
-	cout << "The address of x is" << &x << endl;
+	std::cout << "The address of x is" << &x << std::endl;
 	return 0;
 }
 ```
@@ -706,7 +676,7 @@ int main() {
 int main() {
 	int x = 4;	
 	int* y = &x;
-	cout << "the value stored at x is" << *y << endl;
+	std::cout << "the value stored at x is" << *y << std::endl;
 	return 0;
 }
 ```
@@ -739,11 +709,13 @@ Perform integer addition or subtraction operations on pointers, taking the data 
 #include <stdio.h>
 
 int main() {
-	int x = 12, *x_ptr = &x;
-	char y = 'a', *y_ptr = &y;
+	int x[5];
+	int* x_ptr = &x[0];
 	printf("Value of x_ptr = %p\n", (void*)x_ptr);
-	printf("Value of y_ptr = %p\n", (void*)y_ptr);
 	printf("Value of x_ptr + 1 = %p\n", (void*)(x_ptr + 1));
+	char y[5];
+	char* y_ptr = &y[0];
+	printf("Value of y_ptr = %p\n", (void*)y_ptr);
 	printf("Value of y_ptr + 1 = %p\n", (void*)(y_ptr + 1));
 	return 0;
 }
@@ -751,15 +723,16 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
-	int x = 12, *x_ptr = &x;
-	char y = 'a', *y_ptr = &y;
-	cout << "Value of x_ptr = " << &x_ptr << endl;
-	cout << "Value of y_ptr = " << &y_ptr << endl;
-	cout << "Value of x_ptr + 1 = " << &(x_ptr + 1) << endl;
-	cout << "Value of y_ptr + 1 = " << &(y_ptr + 1) << endl;
+	int x[5];
+	int* x_ptr = &x[0];
+	std::cout << "Value of x_ptr = " << &x_ptr << std::endl;
+	std::cout << "Value of x_ptr + 1 = " << &(x_ptr + 1) << std::endl;
+	char y[5];
+	char* y_ptr = &y[0];
+	std::cout << "Value of y_ptr = " << &y_ptr << std::endl;
+	std::cout << "Value of y_ptr + 1 = " << &(y_ptr + 1) << std::endl;
 	return 0;
 }
 ```
@@ -791,7 +764,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 struct my_struct {
 	int x;
@@ -801,7 +773,7 @@ struct my_struct {
 int main() {
 	struct my_struct object1;
 	object1.x = 1;
-	cout << object1.x << endl;
+	std::cout << object1.x << std::endl;
 	return 0;
 }
 ```
@@ -823,14 +795,13 @@ union my_data {
  
 int main() {
 	union my_data object1;        
-	printf("Size of my_data union: %d\n", sizeof(object1));
+	printf("Size of my_data union: %lu\n", sizeof(object1));
 	return 0;
 }
 ```
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 union my_data {
 	int i;
@@ -840,7 +811,7 @@ union my_data {
 
 int main() {
 	union my_data object1;        
-	cout << "Size of my_data union: " << sizeof(object1) << endl;
+	std::cout << "Size of my_data union: " << sizeof(object1) << std::endl;
 	return 0;
 }
 ```
@@ -865,13 +836,12 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x;
-	cout << "Enter an integer value for x: ";
-	cin >> x;
-	cout << "The value at x is now: " << x << endl;
+	std::cout << "Enter an integer value for x: ";
+	std::cin >> x;
+	std::cout << "The value at x is now: " << x << std::endl;
 	return 0;
 }
 ```
@@ -901,17 +871,16 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	unsigned char a = 5; // 00000101
 	unsigned char b = 9; // 00001001
-	cout <<	"a & b = " << (a & b) << endl; // 00000001
-	cout <<	"a | b = " << (a | b) << endl; // 00001101
-	cout <<	"a ^ b = " << (a ^ b) << endl; // 00001100
-	cout <<	"~a = " << (~a) << endl; // 11111010
-	cout << "b << 1 = " << (b << 1) << endl; // 00010010
-	cout <<	"b >> 1 = " << (b >> 1) << endl; // 00000100
+	std::cout <<	"a & b = " << (a & b) << std::endl; // 00000001
+	std::cout <<	"a | b = " << (a | b) << std::endl; // 00001101
+	std::cout <<	"a ^ b = " << (a ^ b) << std::endl; // 00001100
+	std::cout <<	"~a = " << (~a) << std::endl; // 11111010
+	std::cout << "b << 1 = " << (b << 1) << std::endl; // 00010010
+	std::cout <<	"b >> 1 = " << (b >> 1) << std::endl; // 00000100
 	return 0;
 }
 ```
@@ -940,7 +909,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 typedef unsigned char byte;
 
@@ -977,7 +945,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 enum week {
 	mon,
@@ -992,7 +959,7 @@ enum week {
 int main() {
 	for(int i = mon; i <= sun; i++)
 	{
-		cout << i << endl; 
+		std::cout << i << std::endl; 
 	} 
 	return 0;
 }
@@ -1038,7 +1005,6 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int sum(int count, ...)
 {
@@ -1057,7 +1023,7 @@ int sum(int count, ...)
 int main() {
 	int numbers[3] = {5, 10, 15};
 	int sum_of_numbers = sum(3, numbers[0], numbers[1], numbers[2]);
-	cout << "Sum of the array << sum_of_numbers << endl;
+	std::cout << "Sum of the array << sum_of_numbers << std::endl;
 	return 0;
 }
 ```
@@ -1089,17 +1055,16 @@ int main() {
 ```cpp
 #include <iostream>
 #include <thread>
-using namespace std;
 
 void thread_func() {
-	cout << "Printing from Thread" << endl;
+	std::cout << "Printing from Thread" << std::endl;
 	return NULL;
 }
 
 int main() {
-	thread thread_obj(thread_func);
+	std::thread thread_obj(thread_func);
 	thread_obj.join();
-	cout << "Thread returned" << endl;
+	std::cout << "Thread returned" << std::endl;
 	return 0;
 }
 ```
@@ -1143,24 +1108,24 @@ int main() {
 #include <iostream>
 #include <thread>
 #include <mutex>
-using namespace std;
 
 typedef struct data {
-	mutex mtx;
+	std::mutex mtx;
 	int x;
 } data;
 
 void thread_func(data* d) { 
-	const lock_guard<mutex> lock(d->mtx);
+	d->mtx.lock()
 	d->x = 2;	
+	d->mtx.unlock()
 	return;
 } 
    
 int main() {
 	data d;
-	thread thread_obj(thread_func, &d); 
+	std::thread thread_obj(thread_func, &d); 
 	thread_obj.join();  // Wait for thread to return before continuing execution
-	cout << "x has safely been modified to " << d.x << endl; 
+	std::cout << "x has safely been modified to " << d.x << std::endl; 
 	return 0;
 }
 ```
@@ -1174,7 +1139,7 @@ Memory can be allocated on the heap, an unreserved and relatively large region o
 
 int main() {
 	int* x = (int*)malloc(sizeof(int)); // pointer to a heap-reserved integer
-	if(x) { // test that the memory was allocated before you use it
+	if (x) { // test that the memory was allocated before you use it
 		free(x); // you must manually free any memory you allocated on the heap or it will persist (memory leak)
 	}
 	return 0;
@@ -1184,11 +1149,10 @@ int main() {
 ```cpp
 #include <iostream>
 #include <new>
-using namespace std;
 
 int main() {
 	int* p  = new(int); // pointer to a heap-reserved integer
-	if(p != nullptr) { // test that the memory was allocated before you use it
+	if (p != nullptr) { // test that the memory was allocated before you use it
 		delete p; // you must manually free any memory you allocated on the heap or it will persist (memory leak)
 	}
 	return 0;
@@ -1238,12 +1202,11 @@ int main() {
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 int main() {
 	int x = 1;
 	x += 1;
-	cout << "x = " << x << endl;
+	std::cout << "x = " << x << std::endl;
 	return 0;
 }
 ```
@@ -1256,7 +1219,6 @@ Use the **&** symbol as an alternative to passing an address by pointer or passi
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 void square(int& x) {
 	x *= x;
@@ -1266,7 +1228,7 @@ void square(int& x) {
 int main() {
 	int x = 2;
 	square(x);
-	cout << x << endl;
+	std::cout << x << std::endl;
 	return 0;
 }
 ```
@@ -1280,16 +1242,15 @@ Used as a more readable equivalent to a traditional loop when iterating over a r
 ```cpp
 #include <iostream>
 #include <vector>
-using namespace std;
  
 int main() {
-	vector<int> v = {0, 1, 2, 3};
+	std::vector<int> v = {0, 1, 2, 3};
 	for(const int& i : v) { // access using const reference
-		cout << i << endl;
+		std::cout << i << std::endl;
 	}
 	int a[] = {4, 5, 6, 7};
 	for(int n : a) { // the initializer can be an array
-		cout << n << endl;
+		std::cout << n << std::endl;
 	}
 	return 0;
 }
@@ -1310,17 +1271,16 @@ A declarative region that provides a named scope to its constituent identifiers.
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 namespace ns_1 {
 	void func() {
-		cout << "Called from ns_1" << endl;
+		std::cout << "Called from ns_1" << std::endl;
 	}
 }
 
 namespace ns_2 {
 	void func() {
-		cout << "Called from ns_2" << endl;
+		std::cout << "Called from ns_2" << std::endl;
 	}
 }
 
@@ -1336,7 +1296,6 @@ A user-defined data structure template declared with keyword **class** containin
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1357,7 +1316,6 @@ Functions of a class.
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1375,8 +1333,8 @@ int main() {
 	human john;
 	john.height = 180;
 	john.weight = 220;
-	cout << john.get_height() << endl;
-	cout << john.get_weight() << endl;
+	std::cout << john.get_height() << std::endl;
+	std::cout << john.get_weight() << std::endl;
 	return 0;
 }
 ```
@@ -1390,7 +1348,6 @@ A constructor is an optional special member function of a class used to instanti
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1411,8 +1368,8 @@ class human {
 
 int main() {
 	human john(180, 220);
-	cout << john.get_height() << endl;
-	cout << john.get_weight() << endl;
+	std::cout << john.get_height() << std::endl;
+	std::cout << john.get_weight() << std::endl;
 	return 0;
 }
 ```
@@ -1426,7 +1383,6 @@ Fundamental OOP concept used to group together data and functions, and provide v
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	private: // abstracted from the user
@@ -1447,8 +1403,8 @@ class human {
 
 int main() {
 	human john(180, 220);
-	cout << john.get_height() << endl;
-	cout << john.get_weight() << endl;
+	std::cout << john.get_height() << std::endl;
+	std::cout << john.get_weight() << std::endl;
 	return 0;
 }
 ```
@@ -1462,7 +1418,6 @@ Fundamental OOP concept. The capability of a class to derive properties and char
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1493,9 +1448,9 @@ class adult : public human { // inherit from human class
 int main() {
 	adult john(180, 220);
 	john.occupation = "lawyer";
-	cout << john.get_height() << endl;
-	cout << john.get_weight() << endl;
-	cout << john.get_occupation() << endl;
+	std::cout << john.get_height() << std::endl;
+	std::cout << john.get_weight() << std::endl;
+	std::cout << john.get_occupation() << std::endl;
 	return 0;
 }
 ```
@@ -1511,7 +1466,6 @@ Used to facilitate compile-time polymorphism by allowing creation of more than o
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1524,11 +1478,11 @@ class human {
 };
 
 int print(int x) {
-	cout << x << endl;
+	std::cout << x << std::endl;
 }
 
 int print(float x) {
-	cout << x  << endl;
+	std::cout << x  << std::endl;
 }
 
 int main() {
@@ -1548,7 +1502,6 @@ Used to facilitate runtime polymorphism by allowing redefinition of a base class
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	public:
@@ -1576,9 +1529,9 @@ class adult : public human { // inherit from human class
 			return occupation;
 		}	
 		void print_all() { // virtual function overridden in derived class
-			cout << height << endl;
-			cout << weight << endl;
-			cout << occupation << endl;
+			std::cout << height << std::endl;
+			std::cout << weight << std::endl;
+			std::cout << occupation << std::endl;
 		}
 };
 
@@ -1600,7 +1553,6 @@ A function of a class defined outside of its scope but with the right to access 
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 class human {
 	private:
@@ -1618,7 +1570,7 @@ int get_weight(human h) {
 
 int main() {
 	human john(220);
-	cout << get_weight(john) << endl;
+	std::cout << get_weight(john) << std::endl;
 	return 0;
 }
 ```
@@ -1631,7 +1583,6 @@ A blueprint for creating a generic class or function. The foundation of generic 
 #### C++20
 ```cpp
 #include <iostream>
-using namespace std;
 
 template <class T>
 T largest(T x, T y)
@@ -1641,9 +1592,9 @@ T largest(T x, T y)
 
 int main() {
 	int x, y;
-	cout << "Enter two integers: " << endl;
-	cin >> x >> y;
-	cout << largest(x, y) << endl;
+	std::cout << "Enter two integers: " << std::endl;
+	std::cin >> x >> y;
+	std::cout << largest(x, y) << std::endl;
 	return 0;
 }
 ```
@@ -1657,23 +1608,92 @@ output: 5
 It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
 #### C17
 ```
-myproject/main.c // main function
-myproject/include/file.c // function definitions
-myproject/include/file.h // structs, function prototypes
-myproject/makefile // automated project build file
+myproject/src/main.c // main function
+myproject/include/file.c // function definitions etc
+myproject/include/file.h // structs, function prototypes etc
+myproject/Makefile // automated project build file
 myproject/README.md // store any useful documentation or links to documentation in here
 myproject/obj/file // temporary object files
 myproject/bin/file // executable output from compiler
 ```
 #### C++20
 ```
-myproject/main.cpp // main function
-myproject/include/file.cpp // function definitions
-myproject/include/file.hpp // classes, function prototypes
-myproject/makefile // automated project build file
+myproject/src/main.cpp // main function
+myproject/include/file.cpp // function definitions etc
+myproject/include/file.hpp // classes, function prototypes etc
+myproject/Makefile // automated project build file
 myproject/README.md // store any useful documentation or links to documentation in here
 myproject/obj/file // temporary object files
 myprobect/bin/file // executable output from compiler
+```
+
+## Includes
+Includes are instructions to the preprocessor to include external code. External code is made up of at least a header file (interface) and a source file (implementation).
+
+When compiling your program, **#include** the header, and link the source file at compile time.
+#### C17
+In file src/main.c
+```c
+#include <stdio.h> // Include a dependency from the system library
+#include "../include/file.h" // Include a local dependency from a relative path
+
+int main() {
+	// Use file.h
+}
+```
+In file include/file.c:
+```c
+#include <stdio.h> // Include a dependency from the system library
+#include "file.h" // Include a local dependency from a relative path
+```
+In file include/file.h:
+```c
+#ifndef PROG_H // Only process the below if it hasn't already been processed in the current compilation.
+#define PROG_H
+
+// File contents here
+
+#endif
+```
+#### C++20
+In file src/main.cpp
+```c
+#include <iostream> // Include a dependency from the system library
+#include "../include/file.hpp" // Include a local dependency from a relative path
+
+int main() {
+	// Use file.hpp
+}
+```
+In file include/file.cpp:
+```cpp
+#include <iostream> // Include a dependency from the system library
+#include "file.hpp" // Include a local dependency from a relative path
+```
+In file include/file.hpp:
+```cpp
+#ifndef PROG_HPP // Only process the below if it hasn't already been processed in the current compilation.
+#define PROG_HPP
+
+// File contents here
+
+#endif
+```
+
+## Compilation
+Compiling source code turns it into machine language through preprocessing, compiling, assembly and linking.
+
+#### C17
+```
+gcc -c -std=c17 src/main.c -o obj/main.o // Compile main.c to object
+gcc -c -std=c17 include/file.c -o obj/file.o // Compile file.c to object
+gcc obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
+```
+#### C++20
+```
+g++ -c -std=c++20 src/main.cpp -o obj/main.o // Compile main.cpp to object
+g++ -c -std=c++20 include/file.cpp -o obj/file.o // Compile file.cpp to object
+g++ obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
 ```
 
 Copyright &copy; 2020 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
