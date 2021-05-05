@@ -857,12 +857,12 @@ int main() {
 int main() {
 	unsigned char a = 5; // 00000101
 	unsigned char b = 9; // 00001001
-	std::cout <<	"a & b = " << (a & b) << std::endl; // 00000001
-	std::cout <<	"a | b = " << (a | b) << std::endl; // 00001101
-	std::cout <<	"a ^ b = " << (a ^ b) << std::endl; // 00001100
-	std::cout <<	"~a = " << (~a) << std::endl; // 11111010
+	std::cout << "a & b = " << (a & b) << std::endl; // 00000001
+	std::cout << "a | b = " << (a | b) << std::endl; // 00001101
+	std::cout << "a ^ b = " << (a ^ b) << std::endl; // 00001100
+	std::cout << "~a = " << (~a) << std::endl; // 11111010
 	std::cout << "b << 1 = " << (b << 1) << std::endl; // 00010010
-	std::cout <<	"b >> 1 = " << (b >> 1) << std::endl; // 00000100
+	std::cout << "b >> 1 = " << (b >> 1) << std::endl; // 00000100
 	return 0;
 }
 ```
@@ -1405,9 +1405,9 @@ A user-defined data structure template declared with keyword **class** containin
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		int weight;
+public:
+	int height;
+	int weight;
 };
 
 int main() {
@@ -1425,15 +1425,15 @@ Functions of a class.
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		int weight;
-		int get_height() const {
-			return height;
-		}
-		int get_weight() const {
-			return weight;
-		}
+public:
+	int height;
+	int weight;
+	int get_height() const {
+		return height;
+	}
+	int get_weight() const {
+		return weight;
+	}
 };
 
 int main() {
@@ -1457,20 +1457,20 @@ A constructor is an optional special member function of a class used to instanti
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		int weight;
-		human(int h, int w) {
-			height = h;
-			weight = w;
-		}
-		~human(){};
-		int get_height() const {
-			return height;
-		}
-		int get_weight() const {
-			return weight;
-		}
+public:
+	int height;
+	int weight;
+	human(int h, int w) {
+		height = h;
+		weight = w;
+	}
+	~human(){};
+	int get_height() const {
+		return height;
+	}
+	int get_weight() const {
+		return weight;
+	}
 };
 
 int main() {
@@ -1492,20 +1492,20 @@ Fundamental OOP concept used to group together data and functions, and provide v
 #include <iostream>
 
 class human {
-	private: // abstracted from the user
-		int height;
-		int weight;
-	public: 
-		human(int h, int w) {
-			height = h;
-			weight = w;
-		}
-		int get_height() const {
-			return height;
-		}
-		int get_weight() const {
-			return weight;
-		}
+private: // abstracted from the user
+	int height;
+	int weight;
+public: 
+	human(int h, int w) {
+		height = h;
+		weight = w;
+	}
+	int get_height() const {
+		return height;
+	}
+	int get_weight() const {
+		return weight;
+	}
 };
 
 int main() {
@@ -1527,29 +1527,29 @@ Fundamental OOP concept. The capability of a class to derive properties and char
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		int weight;
-	public: 
-		human(int h, int w) {
-			height = h;
-			weight = w;
-		}
-		int get_height() const {
-			return height;
-		}
-		int get_weight() const {
-			return weight;
-		}
+public:
+	int height;
+	int weight;
+public: 
+	human(int h, int w) {
+		height = h;
+		weight = w;
+	}
+	int get_height() const {
+		return height;
+	}
+	int get_weight() const {
+		return weight;
+	}
 };
 
 class adult : public human { // inherit from human class
-	public:
-	    adult(int h, int w) : human(h, w) {} // call the base class constructor from this constructor
-	    std::string occupation;
-		std::string get_occupation() const {
-			return occupation;
-		}	
+public:
+    adult(int h, int w) : human(h, w) {} // call the base class constructor from this constructor
+    std::string occupation;
+	std::string get_occupation() const {
+		return occupation;
+	}	
 };
 
 int main() {
@@ -1576,13 +1576,13 @@ Used to facilitate compile-time polymorphism by allowing creation of more than o
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		float weight;
-		human(int h, int w) {
-			height = h;
-			weight = w;
-		}
+public:
+	int height;
+	float weight;
+	human(int h, int w) {
+		height = h;
+		weight = w;
+	}
 };
 
 int print(int x) {
@@ -1612,35 +1612,35 @@ Used to facilitate runtime polymorphism by allowing redefinition of a base class
 #include <iostream>
 
 class human {
-	public:
-		int height;
-		int weight;
-	public: 
-		human(int h, int w) {
-			height = h;
-			weight = w;
-		}
-		int get_height() const {
-			return height;
-		}
-		int get_weight() const {
-			return weight;
-		}
-		virtual void print_all() = 0; // ()=0 creates a _pure_ virtual function that must be overridden. Alternatively you can just write a default function as a virtual function with no requirement to be overwritten.
+public:
+	int height;
+	int weight;
+public: 
+	human(int h, int w) {
+		height = h;
+		weight = w;
+	}
+	int get_height() const {
+		return height;
+	}
+	int get_weight() const {
+		return weight;
+	}
+	virtual void print_all() = 0; // ()=0 creates a _pure_ virtual function that must be overridden. Alternatively you can just write a default function as a virtual function with no requirement to be overwritten.
 };
 
 class adult : public human { // inherit from human class
-	public:
-	    adult(int h, int w) : human(h, w) {}
-	    std::string occupation;
-		std::string get_occupation() const {
-			return occupation;
-		}	
-		void print_all() { // virtual function overridden in derived class
-			std::cout << height << std::endl;
-			std::cout << weight << std::endl;
-			std::cout << occupation << std::endl;
-		}
+public:
+    adult(int h, int w) : human(h, w) {}
+    std::string occupation;
+	std::string get_occupation() const {
+		return occupation;
+	}	
+	void print_all() { // virtual function overridden in derived class
+		std::cout << height << std::endl;
+		std::cout << weight << std::endl;
+		std::cout << occupation << std::endl;
+	}
 };
 
 int main() {
@@ -1663,13 +1663,13 @@ A function of a class defined outside of its scope but with the right to access 
 #include <iostream>
 
 class human {
-	private:
-		int weight;
-	public:
-		human(int w) {
-			weight = w;	    
-		}
-		friend int get_weight(human h);
+private:
+	int weight;
+public:
+	human(int w) {
+		weight = w;	    
+	}
+	friend int get_weight(human h);
 };
 
 int get_weight(human h) {
@@ -1744,7 +1744,7 @@ Also referred to as Lambda Functions. A simplified notation for defining and usi
 int main() {
 	int x = 1;
 	auto multiply = [&x](int y)->int{ // Anonymous function takes a reference to x. Returns an int
-    	return x*y;
+		return x*y;
 	};
 	std::cout << multiply(5) << std::endl;
 	x = 2;
