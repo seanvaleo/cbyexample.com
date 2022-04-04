@@ -12,7 +12,7 @@ Check out the list of examples below to get started:
 
   * [Hello World](#hello-world)
   * [Types](#types)
-  * [Initialization](#Initialization)
+  * [Initialization](#initialization)
   * [Comments](#comments)
   * [Switch](#switch)
   * [Array](#array)
