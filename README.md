@@ -144,7 +144,7 @@ int main() {
 	int c(0); // Constructor initialization
 	char greeting_a[6] = {'H','e','l','l','o','\0'};
 	char greeting_b[] = "Hello";
-	std::string greeting_c = "Hello";
+	char* greeting_c = "Hello"; // or std::string greeting_c = "Hello";
 	return 0;
 }
 ```
@@ -169,13 +169,13 @@ Jump to a matching value. Usually cleaner to write than an if/else tree, and fas
 int main() {
 	int x = 2;
 	switch(x) {
-	case 1:
+case 1:
 		printf("One");
 		break; // You must break the search or it will fall through to the next match.
-	case 2:
+case 2:
 		printf("Two");
 		break;
-	default: // If no match is found.
+default: // If no match is found.
 		break;
 	}
 	return 0;
@@ -188,13 +188,13 @@ int main() {
 int main() {
 	int x = 2;
 	switch(x) {
-	case 1:
+case 1:
 		std::cout << "One" << std::endl;
 		break; // You must break the search or it will fall through to the next match.
-	case 2:
+case 2:
 		std::cout << "Two" << std::endl;
 		break;
-	default: // If no match is found.
+default: // If no match is found.
 		break;
 	}
 	return 0;
@@ -391,7 +391,7 @@ int main() {
 	scanf("%d", &x);
 	if (x < 3) goto cleanup;
 	// Program code here
-	cleanup:
+cleanup:
 	return 0;
 }
 ```
@@ -404,7 +404,7 @@ int main() {
 	std::cin >> x;
 	if (x < 3) goto cleanup;
 	// Program code here
-	cleanup:
+cleanup:
 	return 0;
 }
 ```
@@ -478,7 +478,8 @@ int main() {
 	extern int a; // defined elsewhere
 	static int b; // hold value between invocations
 	register int c; // store in CPU register for fast access
-	auto int d; // automatic duration - scope lifetime
+	auto int d; // automatic duration - scope lifetime. Implicit if not specified
+	_Thread_local int e; // thread storage duration
 	return 0;
 }
 ```
@@ -486,7 +487,9 @@ int main() {
 ```cpp
 int main() {
 	extern int a; // defined elsewhere
+	register int c; // automatic storage duration. Also hints to the compiler to place the object in the processor's register
 	static int b; // hold value between invocations
+	thread_local int e; // thread storage duration
 	return 0;
 }
 ```
@@ -1286,6 +1289,8 @@ g++ -c -std=c++20 include/file.cpp -o obj/file.o // Compile file.cpp to object
 g++ obj/main.o obj/file.o -o bin/prog // Link objects and create executable bin/prog
 ```
 
+# C++ Only
+
 ## Modules
 Modules are a new method in C++ to allow for better package management and easier library integration.
 #### C++20
@@ -1352,7 +1357,7 @@ int main() {
 		std::cout << i << std::endl;
 	}
 	int a[] = {4, 5, 6, 7};
-	for(int n : a) { // the initializer can be an array
+	for(auto n : a) { // the initializer can be an array
 		std::cout << n << std::endl;
 	}
 	return 0;
@@ -1784,4 +1789,4 @@ int main() {
 output: Cannot divide by 0
 ```
 
-Copyright &copy; 2021 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
