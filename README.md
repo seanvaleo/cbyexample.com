@@ -1134,16 +1134,14 @@ int main() {
 #include <iostream>
 
 int main() {
-	int* p  = new(int); // pointer to a heap-reserved integer
-	if (p != nullptr) { // test that the memory was allocated before you use it
-		delete p; // you must manually free any memory you allocated on the heap or it will persist (memory leak)
-	}
+	int* p  = new int; // pointer to a heap-reserved integer
+	delete p; // you must manually free any memory you allocated on the heap or it will persist (memory leak)
 	return 0;
 }
 ```
 
 ## Assertions
-Statements used to explicitly test assumptions made by the programmer. Will be checked at runtime, or if static at compile time. A powerful tool for statement or unit testing.
+Statements used to explicitly test assumptions made by the programmer. Will be checked at runtime, or if static at compile time. Typically used for unit testing.
 #### C17
 ```c
 #include <stdio.h>
@@ -1198,26 +1196,24 @@ output: x = 2
 ```
 
 ## Project Structure
-It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability.
+It's useful to follow a conventional and sensible structure when organizing a project, to maintain readability. Below is a suggestion as to how you might organize your project.
 #### C17
 ```
-myproject/src/main.c // main function
-myproject/include/file.c // function definitions etc
-myproject/include/file.h // structs, function prototypes etc
-myproject/Makefile // automated project build file
-myproject/README.md // store any useful documentation or links to documentation in here
-myproject/obj/file // temporary object files
-myproject/bin/file // executable output from compiler
+doc/                   Only for software user guide
+src/                   Only for code: .c and .h files. May also contain a contrib/ directory.
+test/                  Only for integration and unit tests
+Makefile               Makefile
+Style.md               C style guide
+_opt/                  Everything else that is not required to build/test. Developer notes, scripts, linters, ci stuff, analysis tools etc.
 ```
 #### C++20
 ```
-myproject/src/main.cpp // main function
-myproject/include/file.cpp // function definitions etc
-myproject/include/file.hpp // classes, function prototypes etc
-myproject/Makefile // automated project build file
-myproject/README.md // store any useful documentation or links to documentation in here
-myproject/obj/file // temporary object files
-myprobect/bin/file // executable output from compiler
+doc/                   Only for software user guide
+src/                   Only for code: .cpp and .h files. May also contain a contrib/ directory.
+test/                  Only for integration and unit tests
+Makefile               Makefile
+Style.md               C++ style guide
+_opt/                  Everything else that is not required to build/test. Developer notes, scripts, linters, ci stuff, analysis tools etc.
 ```
 
 ## Includes
