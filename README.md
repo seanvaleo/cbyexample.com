@@ -1785,4 +1785,4 @@ int main() {
 output: Cannot divide by 0
 ```
 
-Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample/blob/master/CONTRIBUTORS.txt "Contributors")
+Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample.com/graphs/contributors "Contributors")
