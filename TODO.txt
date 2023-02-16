@@ -1,0 +1,3 @@
+- Complete example programs section
+- Move examples from the README to individual pages
+- Add a copy button to examples
