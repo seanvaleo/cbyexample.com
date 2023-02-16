@@ -70,7 +70,8 @@ Programs:
 
   * [Linked List](#linked-list)
   * [Binary Search Tree](#binary-search-tree)
-  * [TCP Client and Server](#tcp-client-and-server)
+  * [TCP Server](#tcp-server)
+  * [TCP Client](#tcp-client)
   * [Thread Pool](#thread-pool)
   * [Signal Handler](#signal-handler)
   * [Edit a File](#edit-a-file)
@@ -1792,6 +1793,83 @@ int main() {
 ```
 ```
 output: Cannot divide by 0
+```
+
+## Linked List
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## Binary Search Tree
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## TCP Server
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## TCP Client
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## Thread Pool
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## Signal Handler
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
+```
+
+## Edit a File
+#### C17
+```c
+```
+#### C++20
+```cpp
+```
+```
+output: 
 ```
 
 Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample.com/graphs/contributors "Contributors")
