@@ -1795,6 +1795,8 @@ int main() {
 output: Cannot divide by 0
 ```
 
+# Programs
+
 ## Linked List
 #### C17
 ```c
