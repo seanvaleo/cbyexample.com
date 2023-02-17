@@ -2166,11 +2166,10 @@ int main() {
 }
 ```
 ```
-output: 
-Received message: 0
-Received message: 1
-Received message: 2
-Received message: 3
+output: Received message: 0
+        Received message: 1
+        Received message: 2
+        Received message: 3
 ```
 
 Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample.com/graphs/contributors "Contributors")
