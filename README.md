@@ -70,11 +70,7 @@ Programs:
 
   * [Linked List](#linked-list)
   * [Binary Search Tree](#binary-search-tree)
-  * [TCP Server](#tcp-server)
-  * [TCP Client](#tcp-client)
-  * [Thread Pool](#thread-pool)
-  * [Signal Handler](#signal-handler)
-  * [Edit a File](#edit-a-file)
+  * [Copy a File](#copy-a-file)
 
 ## Hello World
 #### C17
@@ -1998,50 +1994,6 @@ int main() {
 ```
 ```
 output: 10 20 30 40 50 60
-```
-
-## TCP Server
-#### C17
-```c
-```
-#### C++20
-```cpp
-```
-```
-output: 
-```
-
-## TCP Client
-#### C17
-```c
-```
-#### C++20
-```cpp
-```
-```
-output: 
-```
-
-## Thread Pool
-#### C17
-```c
-```
-#### C++20
-```cpp
-```
-```
-output: 
-```
-
-## Signal Handler
-#### C17
-```c
-```
-#### C++20
-```cpp
-```
-```
-output: 
 ```
 
 ## Copy a File
