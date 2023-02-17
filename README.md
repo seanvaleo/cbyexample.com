@@ -1892,12 +1892,112 @@ output: 5 -> 1 -> 2 -> 3 -> 4 -> NULL
 ## Binary Search Tree
 #### C17
 ```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+} Node;
+
+Node* create_node(int data) {
+    Node* node = (Node*) malloc(sizeof(Node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+Node* insert_node(Node* node, int data) {
+    if (node == NULL) {
+        return create_node(data);
+    } else if (data < node->data) {
+        node->left = insert_node(node->left, data);
+    } else if (data > node->data) {
+        node->right = insert_node(node->right, data);
+    }
+    return node;
+}
+
+void inorder_traversal(Node* node) {
+    if (node != NULL) {
+        inorder_traversal(node->left);
+        printf("%d ", node->data);
+        inorder_traversal(node->right);
+    }
+}
+
+int main() {
+    Node* root = NULL;
+    root = insert_node(root, 50);
+    insert_node(root, 30);
+    insert_node(root, 20);
+    insert_node(root, 40);
+    insert_node(root, 60);
+    insert_node(root, 10);
+
+    inorder_traversal(root);
+
+    return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <iostream>
+#include <memory>
+
+struct Node {
+    int data;
+    std::unique_ptr<Node> left, right;
+
+    Node(int value) : data(value) {}
+};
+
+class BinarySearchTree {
+public:
+    BinarySearchTree() = default;
+
+    std::unique_ptr<Node> insert_node(std::unique_ptr<Node> node, int value) {
+        if (!node) {
+            return std::make_unique<Node>(value);
+        }
+        if (value < node->data) {
+            node->left = insert_node(std::move(node->left), value);
+        } else if (value > node->data) {
+            node->right = insert_node(std::move(node->right), value);
+        }
+        return node;
+    }
+
+    void inorder_traversal(Node* node) {
+        if (node) {
+            inorder_traversal(node->left.get());
+            std::cout << node->data << " ";
+            inorder_traversal(node->right.get());
+        }
+    }
+
+    std::unique_ptr<Node> root = nullptr;
+};
+
+int main() {
+    BinarySearchTree bst;
+    bst.root = bst.insert_node(std::move(bst.root), 50);
+    bst.root = bst.insert_node(std::move(bst.root), 30);
+    bst.root = bst.insert_node(std::move(bst.root), 20);
+    bst.root = bst.insert_node(std::move(bst.root), 40);
+    bst.root = bst.insert_node(std::move(bst.root), 60);
+    bst.root = bst.insert_node(std::move(bst.root), 10);
+
+    bst.inorder_traversal(bst.root.get());
+    std::cout << std::endl;
+
+    return 0;
+}
 ```
 ```
-output: 
+output: 10 20 30 40 50 60
 ```
 
 ## TCP Server
@@ -1944,12 +2044,65 @@ output:
 output: 
 ```
 
-## Edit a File
+## Copy a File
+Copy a file from source to destination. Note that memory-mapped I/O can be more efficient for large files, but it requires more advanced knowledge of the operating system and may not be available on all platforms.
 #### C17
 ```c
+#include <stdio.h>
+
+int main()
+{
+    FILE *source_file, *destination_file;
+    char buffer[4096];
+    size_t bytes_read;
+
+    source_file = fopen("source.txt", "rb");
+    destination_file = fopen("destination.txt", "wb");
+
+    if (source_file == NULL || destination_file == NULL) {
+        printf("Error opening files.\n");
+        return 1;
+    }
+
+    while ((bytes_read = fread(buffer, 1, sizeof(buffer), source_file)) > 0) {
+        fwrite(buffer, 1, bytes_read, destination_file);
+    }
+
+    fclose(source_file);
+    fclose(destination_file);
+
+    return 0;
+}
 ```
 #### C++20
 ```cpp
+#include <fstream>
+#include <iostream>
+
+int main() {
+    const std::string source = "source.txt";
+    const std::string destination = "destination.txt";
+
+    std::ifstream input(source, std::ios::binary);
+    std::ofstream output(destination, std::ios::binary);
+
+    if (!input.is_open()) {
+        std::cerr << "Failed to open source file.\n";
+        return 1;
+    }
+
+    if (!output.is_open()) {
+        std::cerr << "Failed to open destination file.\n";
+        return 1;
+    }
+
+    output << input.rdbuf();
+
+    input.close();
+    output.close();
+
+    return 0;
+}
 ```
 ```
 output: 
