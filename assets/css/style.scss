@@ -1,5 +1,24 @@
 ---
 ---
 
-$section-headings-color: #000000;
+$section-headings-color: #252519;
 @import "{{ site.theme }}";
+
+body {
+    font-family: 'Georgia', serif;
+    color: #252519;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+a, a:visited {
+    color: #252519;
+    text-decoration: underline;
+}
+
+* {
+    font-size: medium;
+}
