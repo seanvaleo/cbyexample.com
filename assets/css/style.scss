@@ -3,3 +3,7 @@
 
 $section-headings-color: #000000;
 @import "{{ site.theme }}";
+
+body {
+    font-family: 'Georgia', serif;
+}
