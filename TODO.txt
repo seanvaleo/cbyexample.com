@@ -1,4 +1,6 @@
-- Add more example programs 
+- Fix errors in examples
+- Add examples for csv, json, http
+- Add more example programs ie logger
 - Move examples from the README to individual pages
 - Add a copy button to examples
 - Update examples to C++23 and C23

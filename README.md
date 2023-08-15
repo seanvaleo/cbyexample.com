@@ -149,7 +149,8 @@ int main() {
 	int c(0); // Constructor initialization
 	char greeting_a[6] = {'H','e','l','l','o','\0'};
 	char greeting_b[] = "Hello";
-	char* greeting_c = "Hello"; // or std::string greeting_c = "Hello";
+	char* greeting_c = "Hello";
+    std::string greeting_d = "Hello";
 	return 0;
 }
 ```
@@ -166,7 +167,7 @@ Comments are used to write notes and documentation that is to be ignored by the 
 ```
 
 ## Switch
-Jump to a matching value. Usually cleaner to write than an if/else tree, and faster under the hood.
+Jump to a matching value. Can be cleaner to write than an if/else tree.
 #### C17
 ```c
 #include <stdio.h>
@@ -174,13 +175,13 @@ Jump to a matching value. Usually cleaner to write than an if/else tree, and fas
 int main() {
 	int x = 2;
 	switch(x) {
-case 1:
+    case 1:
 		printf("One");
 		break; // You must break the search or it will fall through to the next match.
-case 2:
+    case 2:
 		printf("Two");
 		break;
-default: // If no match is found.
+    default: // If no match is found.
 		break;
 	}
 	return 0;
@@ -193,13 +194,13 @@ default: // If no match is found.
 int main() {
 	int x = 2;
 	switch(x) {
-case 1:
+    case 1:
 		std::cout << "One" << std::endl;
 		break; // You must break the search or it will fall through to the next match.
-case 2:
+    case 2:
 		std::cout << "Two" << std::endl;
 		break;
-default: // If no match is found.
+    default: // If no match is found.
 		break;
 	}
 	return 0;
