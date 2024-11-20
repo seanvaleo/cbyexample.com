@@ -2171,4 +2171,4 @@ output: Received message: 0
         Received message: 3
 ```
 
-Copyright &copy; 2023 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample.com/graphs/contributors "Contributors")
+Copyright &copy; 2024 Sean Valeo | [Source](https://github.com/seanvaleo/cbyexample "Source") | [Contributors](https://github.com/seanvaleo/cbyexample.com/graphs/contributors "Contributors") | [Donate](https://github.com/sponsors/seanvaleo)

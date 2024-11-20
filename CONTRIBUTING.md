@@ -1,3 +1,7 @@
+## Style
+
+Use (4) spaces instead of tabs.
+
 ## Workflow
 
 Please follow the "fork-and-pull" Git workflow, generally as described below:

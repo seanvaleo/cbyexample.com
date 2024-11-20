@@ -1,4 +1,5 @@
 - Fix errors in examples
+- Add library examples
 - Add examples for csv, json, http
 - Add more example programs ie logger
 - Move examples from the README to individual pages
